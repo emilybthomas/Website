@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clients — American Viewpoint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:        #D60707;
+      --red-dark:   #A50000;
+      --blue:       #156AAF;
+      --blue-dark:  #004580;
+      --bg:         #FFFFFF;
+      --bg-muted:   #F5F6FA;
+      --text:       #111111;
+      --text-light: #555555;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+    }
+
+    .logo img {
+      height: 65px;
+      width: auto;
+      display: block;
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    nav a {
+      color: var(--blue-dark);
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      transition: color 0.15s;
+    }
+
+    nav a:hover { color: var(--red); }
+    nav a.active { color: var(--red); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      background: linear-gradient(to right, var(--blue-dark), var(--red-dark));
+      color: #fff;
+      padding: 72px 48px;
+      text-align: left;
+    }
+
+    .page-header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .page-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 12px;
+    }
+
+    .page-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    /* ── SECTION SHARED ── */
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 32px;
+      color: var(--blue-dark);
+    }
+
+    /* ── POLITICAL CLIENTS ── */
+    #political {
+      padding: 80px 0;
+    }
+
+    .clients-intro {
+      font-size: 1rem;
+      color: var(--text-light);
+      line-height: 1.75;
+      max-width: 680px;
+      margin-bottom: 48px;
+    }
+
+    .client-category {
+      margin-bottom: 40px;
+    }
+
+    .client-category-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      border-bottom: 2px solid var(--bg-muted);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .client-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px 24px;
+      list-style: none;
+    }
+
+    .client-list li {
+      font-size: 0.9rem;
+      color: var(--text);
+      padding: 6px 0;
+      border-bottom: 1px solid var(--bg-muted);
+    }
+
+    /* ── CORPORATE CLIENTS ── */
+    #corporate {
+      background: var(--bg-muted);
+      padding: 80px 0;
+    }
+
+    .industry-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .industry-card {
+      background: #fff;
+      border-radius: 4px;
+      border-top: 3px solid var(--blue);
+      padding: 28px 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .industry-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 14px;
+    }
+
+    .industry-clients {
+      list-style: none;
+    }
+
+    .industry-clients li {
+      font-size: 0.875rem;
+      color: var(--text-light);
+      padding: 5px 0;
+      border-bottom: 1px solid var(--bg-muted);
+    }
+
+    .industry-clients li:last-child { border-bottom: none; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--blue-dark);
+      color: rgba(255,255,255,0.75);
+      padding: 56px 0 32px;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 40px;
+    }
+
+    .footer-logo img {
+      height: 36px;
+      width: auto;
+      display: block;
+      margin-bottom: 12px;
+      filter: brightness(0) invert(1);
+    }
+
+    .footer-tagline {
+      font-size: 0.85rem;
+      line-height: 1.65;
+    }
+
+    .footer-heading {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 14px;
+    }
+
+    .footer-contact p {
+      font-size: 0.875rem;
+      margin-bottom: 6px;
+    }
+
+    .footer-contact a { color: rgba(255,255,255,0.85); }
+    .footer-contact a:hover { color: #fff; }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 24px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      nav { display: none; }
+      .client-list { grid-template-columns: 1fr 1fr; }
+      .industry-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 36px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><img src="Logo.png" alt="American Viewpoint" /></a>
+      <nav>
+        <a href="index.html#about">About</a>
+        <a href="index.html#services">Services</a>
+        <a href="clients.html" class="active">Clients</a>
+        <a href="index.html#footer">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-inner">
+      <p class="page-eyebrow">Our Work</p>
+      <h1 class="page-title">Clients</h1>
+    </div>
+  </div>
+
+  <!-- POLITICAL CLIENTS -->
+  <section id="political">
+    <div class="container">
+      <!-- <p class="section-label">Political</p> -->
+      <h2 class="section-title">Political Clients</h2>
+      <p class="clients-intro">American Viewpoint has served on the polling team of nearly every Republican Presidential nominee since President Reagan, and has helped elect countless U.S. Senators, Members of Congress, Governors, and other elected officials across the country.</p>
+
+      <div class="client-category">
+        <div class="client-category-title">Presidential Campaigns</div>
+        <ul class="client-list">
+          <li>Ronald Reagan</li>
+          <li>George H.W. Bush</li>
+          <li>Bob Dole</li>
+          <li>George W. Bush</li>
+          <li>John McCain</li>
+          <li>Mitt Romney</li>
+        </ul>
+      </div>
+
+      <div class="client-category">
+        <div class="client-category-title">U.S. Senate</div>
+        <ul class="client-list">
+          <li>Kelly Ayotte (NH)</li>
+          <li>Roy Blunt (MO)</li>
+          <li>Richard Burr (NC)</li>
+          <li>Thad Cochran (MS)</li>
+          <li>Susan Collins (ME)</li>
+          <li>John Cornyn (TX)</li>
+          <li>Mike Crapo (ID)</li>
+          <li>Mike DeWine (OH)</li>
+          <li>Deb Fischer (NE)</li>
+          <li>Chuck Grassley (IA)</li>
+          <li>Orrin Hatch (UT)</li>
+          <li>Johnny Isakson (GA)</li>
+          <li>Ron Johnson (WI)</li>
+          <li>Mark Kirk (IL)</li>
+          <li>Mitch McConnell (KY)</li>
+          <li>Jerry Moran (KS)</li>
+          <li>Lisa Murkowski (AK)</li>
+          <li>Rob Portman (OH)</li>
+          <li>Pat Roberts (KS)</li>
+          <li>Marco Rubio (FL)</li>
+          <li>Elise Stefanik (NY)</li>
+          <li>John Thune (SD)</li>
+          <li>Roger Wicker (MS)</li>
+        </ul>
+      </div>
+
+      <div class="client-category">
+        <div class="client-category-title">Governors</div>
+        <ul class="client-list">
+          <li>Spencer Abraham (MI)</li>
+          <li>Bill Owens (CO)</li>
+          <li>Bob Riley (AL)</li>
+          <li>Phil Scott (VT)</li>
+          <li>Pete Wilson (CA)</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CORPORATE CLIENTS -->
+  <section id="corporate">
+    <div class="container">
+      <!-- <p class="section-label">Corporate</p> -->
+      <h2 class="section-title">Corporate Clients</h2>
+
+      <div class="industry-grid">
+
+        <div class="industry-card">
+          <div class="industry-name">Healthcare &amp; Insurance</div>
+          <ul class="industry-clients">
+            <li>America's Health Insurance Plans (AHIP)</li>
+            <li>Blue Cross Blue Shield Association</li>
+            <li>PhRMA</li>
+            <li>American Hospital Association</li>
+            <li>Federation of American Hospitals</li>
+          </ul>
+        </div>
+
+        <div class="industry-card">
+          <div class="industry-name">Telecommunications &amp; Technology</div>
+          <ul class="industry-clients">
+            <li>AT&amp;T</li>
+            <li>Verizon</li>
+            <li>CTIA — The Wireless Association</li>
+            <li>USTelecom</li>
+          </ul>
+        </div>
+
+        <div class="industry-card">
+          <div class="industry-name">Energy &amp; Environment</div>
+          <ul class="industry-clients">
+            <li>American Gas Association</li>
+            <li>American Petroleum Institute</li>
+            <li>Nuclear Energy Institute</li>
+            <li>Edison Electric Institute</li>
+          </ul>
+        </div>
+
+        <div class="industry-card">
+          <div class="industry-name">Associations &amp; Nonprofits</div>
+          <ul class="industry-clients">
+            <li>U.S. Chamber of Commerce</li>
+            <li>National Federation of Independent Business</li>
+            <li>National Retail Federation</li>
+            <li>American Bankers Association</li>
+            <li>National Association of Manufacturers</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo"><img src="Logo.png" alt="American Viewpoint" /></div>
+          <p class="footer-tagline">Accurate. Attentive. Actionable.<br />Public opinion research since 1985.</p>
+        </div>
+        <div class="footer-contact">
+          <p class="footer-heading">Get In Touch</p>
+          <p>Phone: <a href="tel:7036843325">(703) 684-3325</a></p>
+          <p>Email: <a href="mailto:info@amview.com">info@amview.com</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2018 American Viewpoint, Inc. All rights reserved. American Viewpoint&trade; is a registered trademark.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
