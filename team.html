@@ -433,12 +433,20 @@
         collapse();
       });
 
+      card.querySelector('.team-photo').addEventListener('click', function(e) {
+        if (card.classList.contains('expanded')) {
+          e.stopPropagation();
+          collapse();
+        }
+      });
+
       card.addEventListener('click', function() {
         if (card.classList.contains('expanded')) return;
+        var scrollY = window.scrollY;
         collapse();
         card.classList.add('expanded');
         grid.classList.add('has-expanded');
-        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        window.scrollTo(0, scrollY);
       });
     });
   </script>
