@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team — American Viewpoint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:        #D60707;
+      --red-dark:   #A50000;
+      --blue:       #156AAF;
+      --blue-dark:  #004580;
+      --bg:         #FFFFFF;
+      --bg-muted:   #F5F6FA;
+      --text:       #111111;
+      --text-light: #555555;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+    }
+
+    .logo img {
+      height: 65px;
+      width: auto;
+      display: block;
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    nav a {
+      color: var(--blue-dark);
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      transition: color 0.15s;
+    }
+
+    nav a:hover { color: var(--red); }
+    nav a.active { color: var(--red); }
+
+    /* ── SECTION SHARED ── */
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--blue-dark);
+    }
+
+    /* ── TEAM ── */
+    #team {
+      padding: 60px 0 30px;
+      flex: 1;
+    }
+
+    .team-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px 32px;
+    }
+
+    .team-card {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .team-card:hover .team-photo { opacity: 0.85; }
+
+    .team-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      transition: opacity 0.2s;
+    }
+
+    .team-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 2px;
+    }
+
+    .team-title {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--red);
+      margin-bottom: 10px;
+    }
+
+    /* bio hidden by default */
+    .team-bio {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      line-height: 1.7;
+      display: none;
+    }
+
+    .team-bio + .team-bio {
+      margin-top: 12px;
+    }
+
+    /* hide non-expanded cards when any card is open */
+    .team-grid.has-expanded .team-card:not(.expanded) {
+      display: none;
+    }
+
+    /* expanded state */
+    .team-card.expanded {
+      grid-column: 1 / -1;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 40px;
+      background: var(--bg-muted);
+      border-radius: 6px;
+      padding: 32px;
+      position: relative;
+    }
+
+    .team-card-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 1.25rem;
+      line-height: 1;
+      color: var(--text-light);
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: color 0.15s, background 0.15s;
+      display: none;
+    }
+    .team-card-close:hover {
+      color: var(--text);
+      background: rgba(0,0,0,0.06);
+    }
+    .team-card.expanded .team-card-close { display: block; }
+
+    .team-card.expanded .team-photo {
+      width: 220px;
+      flex-shrink: 0;
+      margin-bottom: 0;
+    }
+
+    .team-card.expanded .team-text { flex: 1; }
+
+    .team-card.expanded .team-name {
+      font-size: 1.25rem;
+      margin-bottom: 4px;
+    }
+
+    .team-card.expanded .team-title { margin-bottom: 16px; }
+
+    .team-card.expanded .team-bio {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--blue-dark);
+      color: rgba(255,255,255,0.75);
+      padding: 56px 0 32px;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 40px;
+    }
+
+    .footer-logo img {
+      height: 36px;
+      width: auto;
+      display: block;
+      margin-bottom: 12px;
+      filter: brightness(0) invert(1);
+    }
+
+    .footer-tagline {
+      font-size: 0.85rem;
+      line-height: 1.65;
+    }
+
+    .footer-heading {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 14px;
+    }
+
+    .footer-contact p { font-size: 0.88rem; margin-bottom: 6px; }
+    .footer-contact a { color: rgba(255,255,255,0.75); }
+    .footer-contact a:hover { color: #fff; }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 24px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    @media (max-width: 700px) {
+      nav { display: none; }
+      .team-grid { grid-template-columns: 1fr 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 36px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><img src="Logo.png" alt="American Viewpoint" /></a>
+      <nav>
+        <a href="index.html#about">About</a>
+        <a href="index.html#services">Services</a>
+        <a href="team.html" class="active">Team</a>
+        <a href="clients.html">Clients</a>
+        <a href="index.html#footer">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- TEAM -->
+  <section id="team">
+    <div class="container">
+      <div class="team-header">
+        <h1 class="section-title">Meet the Team</h1>
+      </div>
+
+      <div class="team-grid">
+
+        <div class="team-card">
+          <button class="team-card-close" aria-label="Close">&#x2715;</button>
+          <img class="team-photo" src="Team/Linda.webp" alt="Linda DiVall" />
+          <div class="team-text">
+            <div class="team-name">Linda DiVall</div>
+            <div class="team-title">Executive Chairman</div>
+            <p class="team-bio">As American Viewpoint's founder, Executive Chairman and CEO, Linda DiVall has provided effective strategies to both political and corporate clients for 30 years.</p>
+            <p class="team-bio">Linda has conducted research on behalf of the RGA, NRCC, NRSC, RNC as well as NRSC and NRCC IE efforts.  Her strategic insight has been utilized on policy issues of Social Security, Medicare, retirement security and healthcare as well as providing guidance to the GOP on strategies to counter the gender gap.</p>
+            <p class="team-bio">Linda is the pollster for the re-election campaigns of Senator Roy Blunt, Senator Johnny Isakson and Senator Kelly Ayotte.  She served as the pollster for Senator Jim Talent, Senator Fred Thompson, Senator Phil Gramm.</p>
+            <p class="team-bio">In 2015, Linda was selected by Governor John Kasich to be the pollster for his Super PAC, New Day for America where she conducted polling and focus groups in IA, NH, and SC.</p>
+            <p class="team-bio">Linda has been part of the polling team for every GOP Presidential candidate since 1988.</p>
+            <p class="team-bio">On the corporate and association front, Linda's clients include Altria, Federation of American Hospitals, Jacksonville Jaguars, HCA, Public Notice, Renewable Fuels Association, PBS, Los Angeles Times, WellStar, AARP and American Automotive Policy Council.</p>
+            <p class="team-bio">During the 2012 election cycle, Linda conducted over 60 focus groups and dial testing sessions for corporate and political clients.</p>
+            <p class="team-bio">Linda has worked as consultant and analyst for CBS Election Night coverage since 1988, providing insight to Dan Rather, Bob Schieffer, Lesley Stahl, Diane Sawyer, Connie Chung and Katie Couric.  A frequent source for the national press, Linda has been a guest commentator for every major broadcast and cable news network, PBS, and C-Span. She has appeared numerous times on CBS' “Face the Nation,” PBS' “NewsHour with Jim Lehrer” and CNN's “State of the Union with Candy Crowley.”</p>
+            <p class="team-bio">Linda is from Mt Prospect, IL in suburban Chicago and an honors graduate of Arizona State University.</p>
+            <p class="team-bio">“I hired Linda DiVall to be my pollster because I wanted a person of integrity and candor; a pollster I could count on to tell me exactly how I stood so our team could plan accordingly.  In an exceedingly difficult campaign cycle Linda's data was right on target every step of the way and her strategic recommendations and ability to integrate with our entire campaign team served us well.  You can count on Linda to tell it like it is and anticipate the environment moving forward.”  - Senator Kelly Ayotte, R (NH)</p>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <button class="team-card-close" aria-label="Close">&#x2715;</button>
+          <img class="team-photo" src="Team/Randy.webp" alt="Randall Gutermuth" />
+          <div class="team-text">
+            <div class="team-name">Randall Gutermuth</div>
+            <div class="team-title">President &amp; CEO</div>
+            <p class="team-bio">Bio coming soon.</p>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <button class="team-card-close" aria-label="Close">&#x2715;</button>
+          <img class="team-photo" src="Team/Andy.webp" alt="Andy Blunt" />
+          <div class="team-text">
+            <div class="team-name">Andy Blunt</div>
+            <div class="team-title">Director of Strategic Development</div>
+            <p class="team-bio">Bio coming soon.</p>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <button class="team-card-close" aria-label="Close">&#x2715;</button>
+          <img class="team-photo" src="Team/Sean.webp" alt="Sean O'Donnell" />
+          <div class="team-text">
+            <div class="team-name">Sean O'Donnell</div>
+            <div class="team-title">Chief Technology Officer</div>
+            <p class="team-bio">Bio coming soon.</p>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <button class="team-card-close" aria-label="Close">&#x2715;</button>
+          <img class="team-photo" src="Team/Abbey.webp" alt="Abbey Lee" />
+          <div class="team-text">
+            <div class="team-name">Abbey Lee</div>
+            <div class="team-title">Research Director</div>
+            <p class="team-bio">Bio coming soon.</p>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <button class="team-card-close" aria-label="Close">&#x2715;</button>
+          <img class="team-photo" src="Team/Emily.jpg" alt="Emily Thomas" />
+          <div class="team-text">
+            <div class="team-name">Emily Thomas</div>
+            <div class="team-title">Data Director</div>
+            <p class="team-bio">Bio coming soon.</p>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <button class="team-card-close" aria-label="Close">&#x2715;</button>
+          <img class="team-photo" src="Team/Marshall.webp" alt="Marshall Whinney" />
+          <div class="team-text">
+            <div class="team-name">Marshall Whinney</div>
+            <div class="team-title">Research Analyst</div>
+            <p class="team-bio">Bio coming soon.</p>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <button class="team-card-close" aria-label="Close">&#x2715;</button>
+          <img class="team-photo" src="Team/Katherine.jpg" alt="Katherine Stano" />
+          <div class="team-text">
+            <div class="team-name">Katherine Stano</div>
+            <div class="team-title">Research Analyst</div>
+            <p class="team-bio">Bio coming soon.</p>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <button class="team-card-close" aria-label="Close">&#x2715;</button>
+          <img class="team-photo" src="Team/Ellie.jpg" alt="Ellie Bodman" />
+          <div class="team-text">
+            <div class="team-name">Ellie Bodman</div>
+            <div class="team-title">Research Analyst</div>
+            <p class="team-bio">Bio coming soon.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo"><img src="Logo.png" alt="American Viewpoint" /></div>
+          <p class="footer-tagline">Accurate. Attentive. Actionable.<br />Public opinion research since 1985.</p>
+        </div>
+        <div class="footer-contact">
+          <p class="footer-heading">Get In Touch</p>
+          <p>Phone: <a href="tel:7036843325">(703) 684-3325</a></p>
+          <p>Email: <a href="mailto:info@amview.com">info@amview.com</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2018 American Viewpoint, Inc. All rights reserved. American Viewpoint&trade; is a registered trademark.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    var grid = document.querySelector('.team-grid');
+
+    function collapse() {
+      document.querySelectorAll('.team-card.expanded').forEach(function(c) {
+        c.classList.remove('expanded');
+      });
+      grid.classList.remove('has-expanded');
+    }
+
+    document.querySelectorAll('.team-card').forEach(function(card) {
+      // close button stops the click from also toggling the card
+      card.querySelector('.team-card-close').addEventListener('click', function(e) {
+        e.stopPropagation();
+        collapse();
+      });
+
+      card.addEventListener('click', function() {
+        if (card.classList.contains('expanded')) return;
+        collapse();
+        card.classList.add('expanded');
+        grid.classList.add('has-expanded');
+        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    });
+  </script>
+
+</body>
+</html>

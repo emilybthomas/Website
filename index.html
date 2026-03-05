@@ -143,7 +143,7 @@
     .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
 
     /* ── ABOUT ── */
-    #about { padding: 88px 0; }
+    #about { padding: 32px 0; scroll-margin-top: 80px; }
 
     .about-grid {
       display: grid;
@@ -206,12 +206,13 @@
     /* ── SERVICES ── */
     #services {
       background: var(--bg-muted);
-      padding: 88px 0;
+      padding: 24px 0;
+      scroll-margin-top: 80px;
     }
 
     .services-header {
       text-align: center;
-      margin-bottom: 52px;
+      margin-bottom: 24px;
     }
 
     .services-grid {
@@ -261,24 +262,35 @@
     }
 
     /* ── TESTIMONIALS ── */
-    #testimonials { padding: 88px 0; }
+    #testimonials { padding: 24px 0; scroll-margin-top: 80px; }
 
     .testimonials-header {
       text-align: center;
-      margin-bottom: 52px;
+      margin-bottom: 24px;
     }
 
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
+    /* ── SLIDER ── */
+    .testimonials-slider {
+      position: relative;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .slider-track {
+      overflow: hidden;
+    }
+
+    .slider-cards {
+      display: flex;
+      transition: transform 0.45s ease;
     }
 
     .quote-card {
       background: var(--bg-muted);
       border-radius: 4px;
-      padding: 32px 28px;
+      padding: 40px 40px 32px;
       position: relative;
+      flex: 0 0 100%;
     }
 
     .quote-mark {
@@ -326,6 +338,51 @@
       font-size: 0.78rem;
       color: var(--text-light);
     }
+
+    /* nav buttons */
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--blue-dark);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      font-size: 1.1rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      opacity: 0.75;
+      transition: opacity 0.2s;
+    }
+    .slider-btn:hover { opacity: 1; }
+    .slider-btn.prev { left: -52px; }
+    .slider-btn.next { right: -52px; }
+
+    /* dots */
+    .slider-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 28px;
+    }
+    .slider-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--blue-dark);
+      opacity: 0.25;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: opacity 0.2s;
+    }
+    .slider-dot.active { opacity: 1; }
 
     /* ── FOOTER ── */
     footer {
@@ -401,6 +458,7 @@
       <nav>
         <a href="#about">About</a>
         <a href="#services">Services</a>
+        <a href="team.html">Team</a>
         <a href="clients.html">Clients</a>
         <a href="#footer">Contact</a>
       </nav>
@@ -414,7 +472,7 @@
       <h1 class="hero-tagline">Accurate.<br><span>Attentive.</span><br>Actionable.</h1>
       <p class="hero-sub">Public Opinion Research Since 1985</p>
       <div style="text-align: center;">
-        <a href="#about" class="btn btn-primary">Meet the Team</a>
+        <a href="team.html" class="btn btn-primary">Meet the Team</a>
       </div>
     </div>
   </section>
@@ -522,70 +580,86 @@
         <!-- <p class="section-label">Client Voices</p> -->
         <h2 class="section-title">Testimonials</h2>
       </div>
-      <div class="testimonials-grid">
+      <div class="testimonials-slider" id="testimonialSlider">
+        <button class="slider-btn prev" aria-label="Previous">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 3L5 8L10 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="slider-btn next" aria-label="Next">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 3L11 8L6 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
 
-        <div class="quote-card">
-          <span class="quote-mark">"</span>
-          <p class="quote-text">American Viewpoint provides so much more than numbers. They were an invaluable member of our strategy team, incorporating updated polling data with input into message direction and coalition development. They understand resource allocation and maximized our campaign's ability to deliver its message to our target audience, and their daily tracking memos helped us seize the offensive and drive down my opponent's numbers.</p>
-          <div class="quote-attribution">
-            <div class="quote-line"></div>
-            <div>
-              <div class="quote-name">Roy Blunt</div>
-              <div class="quote-title-text">Former U.S. Senator, Missouri</div>
+        <div class="slider-track">
+          <div class="slider-cards">
+
+            <div class="quote-card">
+              <span class="quote-mark">"</span>
+              <p class="quote-text">American Viewpoint provides so much more than numbers. They were an invaluable member of our strategy team, incorporating updated polling data with input into message direction and coalition development. They understand resource allocation and maximized our campaign's ability to deliver its message to our target audience, and their daily tracking memos helped us seize the offensive and drive down my opponent's numbers.</p>
+              <div class="quote-attribution">
+                <div class="quote-line"></div>
+                <div>
+                  <div class="quote-name">Roy Blunt</div>
+                  <div class="quote-title-text">Former U.S. Senator, Missouri</div>
+                </div>
+              </div>
             </div>
+
+            <div class="quote-card">
+              <span class="quote-mark">"</span>
+              <p class="quote-text">The polling data helped drive the strategic direction of advertising and scheduling. In the midst of a turbulent campaign environment, American Viewpoint could be counted on to provide sound advice and steady counsel to keep us all focused. At the conclusion of the last survey, Linda set a goal for the campaign to hit 60% vote share. While we thought that was impossible we nonetheless embraced that goal - and shattered it.</p>
+              <div class="quote-attribution">
+                <div class="quote-line"></div>
+                <div>
+                  <div class="quote-name">Elise Stefanik</div>
+                  <div class="quote-title-text">U.S. Representative, New York</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="quote-card">
+              <span class="quote-mark">"</span>
+              <p class="quote-text">Linda DiVall, and the American Viewpoint team, have served as my pollster and members of my strategy team for over 15 years. The quality and accuracy of their data, their strategic insight and candid appraisals have been instrumental in providing guidance for my campaigns. Their integrity is unmatched and they are on call 24/7 for those critical decisions every campaign is confronted with.</p>
+              <div class="quote-attribution">
+                <div class="quote-line"></div>
+                <div>
+                  <div class="quote-name">Johnny Isakson</div>
+                  <div class="quote-title-text">Former U.S. Senator, Georgia</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="quote-card">
+              <span class="quote-mark">"</span>
+              <p class="quote-text">I hired Linda DiVall to be my pollster because I wanted a person of integrity and candor; a pollster I could count on to tell me exactly how I stood so our team could plan accordingly. In an exceedingly difficult campaign cycle Linda's data was right on target every step of the way and her strategic recommendations and ability to integrate with our entire campaign team served us well. You can count on Linda to tell it like it is and anticipate the environment moving forward.</p>
+              <div class="quote-attribution">
+                <div class="quote-line"></div>
+                <div>
+                  <div class="quote-name">Kelly Ayotte</div>
+                  <div class="quote-title-text">Former U.S. Senator and Current Governor, New Hampshire</div>
+                  <!-- confirim it is okay to use her current title -->
+                </div>
+              </div>
+            </div>
+
+            <div class="quote-card">
+              <span class="quote-mark">"</span>
+              <p class="quote-text">In an unconventional election cycle, working with Linda and the whole American Viewpoint operation was critical to our campaign's decision-making and ultimate success. We are thankful for the positive relationship and prompt delivery American Viewpoint provided as a key part of our entire team while we made optimal decisions to drive our messages with voters in a constant news-cycle world.</p>
+              <div class="quote-attribution">
+                <div class="quote-line"></div>
+                <div>
+                  <div class="quote-name">Trey Kilpatrick</div>
+                  <div class="quote-title-text">Former Senator Johnny Isakson's Campaign Manager 2016</div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <div class="quote-card">
-          <span class="quote-mark">"</span>
-          <p class="quote-text">The polling data helped drive the strategic direction of advertising and scheduling. In the midst of a turbulent campaign environment, American Viewpoint could be counted on to provide sound advice and steady counsel to keep us all focused. At the conclusion of the last survey, Linda set a goal for the campaign to hit 60% vote share. While we thought that was impossible we nonetheless embraced that goal - and shattered it.</p>
-          <div class="quote-attribution">
-            <div class="quote-line"></div>
-            <div>
-              <div class="quote-name">Elise Stefanik</div>
-              <div class="quote-title-text">U.S. Representative, New York</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="quote-card">
-          <span class="quote-mark">"</span>
-          <p class="quote-text">Linda DiVall, and the American Viewpoint team, have served as my pollster and members of my strategy team for over 15 years. The quality and accuracy of their data, their strategic insight and candid appraisals have been instrumental in providing guidance for my campaigns. Their integrity is unmatched and they are on call 24/7 for those critical decisions every campaign is confronted with.</p>
-          <div class="quote-attribution">
-            <div class="quote-line"></div>
-            <div>
-              <div class="quote-name">Johnny Isakson</div>
-              <div class="quote-title-text">Former U.S. Senator, Georgia</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="quote-card">
-          <span class="quote-mark">"</span>
-          <p class="quote-text">I hired Linda DiVall to be my pollster because I wanted a person of integrity and candor; a pollster I could count on to tell me exactly how I stood so our team could plan accordingly. In an exceedingly difficult campaign cycle Linda's data was right on target every step of the way and her strategic recommendations and ability to integrate with our entire campaign team served us well. You can count on Linda to tell it like it is and anticipate the environment moving forward.</p>
-          <div class="quote-attribution">
-            <div class="quote-line"></div>
-            <div>
-              <div class="quote-name">Kelly Ayotte</div>
-              <div class="quote-title-text">Former U.S. Senator and Current Governor, New Hampshire</div>
-              <!-- confirim it is okay to use her current title -->
-            </div>
-          </div>
-        </div>
-
-        <div class="quote-card">
-          <span class="quote-mark">"</span>
-          <p class="quote-text">In an unconventional election cycle, working with Linda and the whole American Viewpoint operation was critical to our campaign's decision-making and ultimate success. We are thankful for the positive relationship and prompt delivery American Viewpoint provided as a key part of our entire team while we made optimal decisions to drive our messages with voters in a constant news-cycle world.</p>
-          <div class="quote-attribution">
-            <div class="quote-line"></div>
-            <div>
-              <div class="quote-name">Trey Kilpatrick</div>
-              <div class="quote-title-text">Former Senator Johnny Isakson's Campaign Manager 2016</div>
-              <!-- confirim it is okay to use her current title -->
-            </div>
-          </div>
-        </div>
-
+        <div class="slider-dots" id="sliderDots"></div>
       </div>
     </div>
   </section>
@@ -610,6 +684,47 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      const slider   = document.getElementById('testimonialSlider');
+      const track    = slider.querySelector('.slider-cards');
+      const cards    = slider.querySelectorAll('.quote-card');
+      const dotsWrap = document.getElementById('sliderDots');
+      const total    = cards.length;
+      let current    = 0;
+      let timer;
+
+      // build dots
+      cards.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'slider-dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        d.addEventListener('click', () => goTo(i));
+        dotsWrap.appendChild(d);
+      });
+
+      function goTo(n) {
+        current = (n + total) % total;
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        dotsWrap.querySelectorAll('.slider-dot').forEach((d, i) =>
+          d.classList.toggle('active', i === current));
+      }
+
+      function next() { goTo(current + 1); }
+      function prev() { goTo(current - 1); }
+
+      slider.querySelector('.next').addEventListener('click', next);
+      slider.querySelector('.prev').addEventListener('click', prev);
+
+      // auto-advance every 6 s, pause on hover
+      function startTimer() { timer = setInterval(next, 6000); }
+      function stopTimer()  { clearInterval(timer); }
+      startTimer();
+      slider.addEventListener('mouseenter', stopTimer);
+      slider.addEventListener('mouseleave', startTimer);
+    })();
+  </script>
 
 </body>
 </html>
