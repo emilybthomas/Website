@@ -224,10 +224,17 @@
 
     .footer-inner {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr auto 1fr;
       gap: 48px;
       margin-bottom: 40px;
     }
+
+    .footer-links p {
+      font-size: 0.875rem;
+      margin-bottom: 6px;
+    }
+    .footer-links a { color: rgba(255,255,255,0.85); }
+    .footer-links a:hover { color: #fff; }
 
     .footer-logo img {
       height: 36px;
@@ -319,7 +326,7 @@
           <div class="team-text">
             <div class="team-name">Randall Gutermuth</div>
             <div class="team-title">President &amp; CEO</div>
-            <p class="team-bio">American Viewpoint President Randall Gutermuth specializes in political and public affairs research, as well as Perception Analyzer™ Dial Testing.  Since joining American Viewpoint in 2001, Randall's political clients have included the RNC, the RGA, the NRCC, CLF, SLF, Speaker Kevin McCarthy, Oklahoma Governor Kevin Stitt, Georgia Governor Brian Kemp, former Missouri Senator Jim Talent, Former Missouri Governor Matt Blunt, Missouri Senator Roy Blunt, former Georgia Senator Johnny Isakson, current and former Congressional members Judy Biggert, Jo Ann Emerson, Randy Feenstra, Frank Guinta, Vicky Hartzler, Nancy Johnson, Blaine Luetkemeyer, Devin Nunes, Jay Obernolte, Mike Oxley, John Ratcliffe, Austin Scott, Jason Smith, Michelle Steel, and Ed Whitfield, among others.  Gutermuth was also a member of the polling team for the Super PAC supporting Governor Walker's presidential bid.</p>
+            <p class="team-bio">American Viewpoint President Randall Gutermuth specializes in political and public affairs research, as well as Perception Analyzer™ Dial Testing.  Since joining American Viewpoint in 2001, Randall's political clients have included the RNC, the RGA, the NRCC, CLF, SLF, Speaker Kevin McCarthy, Oklahoma Governor Kevin Stitt, Georgia Governor Brian Kemp, former Missouri Senator Jim Talent, Former Missouri Governor Matt Blunt, Missouri Senator Roy Blunt, former Georgia Senator Johnny Isakson, current and former Congressional members Judy Biggert, Jo Ann Emerson, Randy Feenstra, Frank Guinta, Vicky Hartzler, Jeff Hurd, Nancy Johnson, Blaine Luetkemeyer, Devin Nunes, Jay Obernolte, Mike Oxley, John Ratcliffe, Austin Scott, Jason Smith, Michelle Steel, and Ed Whitfield, among others.  Gutermuth was also a member of the polling team for the Super PAC supporting Governor Walker's presidential bid.</p>
             <p class="team-bio">Gutermuth has also conducted legislative caucus polling for the Georgia State House, Illinois State House and Missouri State Senate as well as having served as the pollster for numerous down ballot statewide officeholders and winning initiative and referendum campaigns.   </p>
             <p class="team-bio">Randall has also conducted polling for numerous independent expenditure committees and Super PACs. Randall has conducted corporate research in recent years for such organizations as AARP, Altria, AT&T, Federation of American Hospitals, HCA, Georgia Power, The Jacksonville Jaguars, KBR, Pfizer and numerous others.</p>
             <p class="team-bio">Gutermuth has conducted over 100 Perception Analyzer dial tests, including tests of the 2000 Republican and Democratic presidential primary debates, the results of which aired on such networks as ABC, NBC, CNBC, CNN, Headline News, and Fox News. In 2004 Randall conducted ad testing on behalf of Bush-Cheney '04 and in 2008 he conducted dial testing of the conventions and debates for the McCain-Palin campaign.  Randall has also utilized dial testing to fine tune advertising for numerous campaigns, issue groups and organizations.</p>
@@ -419,6 +426,12 @@
         <div>
           <div class="footer-logo"><img src="Logo.png" alt="American Viewpoint" /></div>
           <p class="footer-tagline">Accurate. Attentive. Actionable.<br />Public opinion research since 1985.</p>
+        </div>
+        <div class="footer-links">
+          <p class="footer-heading">Pages</p>
+          <p><a href="services.html">Services</a></p>
+          <p><a href="case-studies.html">Case Studies</a></p>
+          <p><a href="news.html">News</a></p>
         </div>
         <div class="footer-contact">
           <p class="footer-heading">Get In Touch</p>

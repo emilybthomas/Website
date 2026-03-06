@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News — American Viewpoint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:        #D60707;
+      --red-dark:   #A50000;
+      --blue:       #156AAF;
+      --blue-dark:  #004580;
+      --bg:         #FFFFFF;
+      --bg-muted:   #F5F6FA;
+      --text:       #111111;
+      --text-light: #555555;
+      --purple: #531a55;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+    }
+
+    .logo img {
+      height: 65px;
+      width: auto;
+      display: block;
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    nav a {
+      color: var(--blue-dark);
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      transition: color 0.15s;
+    }
+
+    nav a:hover { color: var(--red-dark); }
+    nav a.active { color: var(--red-dark); }
+
+    /* ── PAGE HEADER ── */
+    #page-header {
+      background: linear-gradient(135deg, var(--blue-dark), var(--red-dark), var(--blue-dark), var(--red-dark));
+      background-size: 400% 400%;
+      animation: gradientShift 48s ease-in-out infinite;
+      color: #fff;
+      padding: 64px 0 56px;
+    }
+
+    @keyframes gradientShift {
+      0%   { background-position: 0% 20%; }
+      18%  { background-position: 75% 65%; }
+      35%  { background-position: 20% 90%; }
+      52%  { background-position: 95% 25%; }
+      70%  { background-position: 40% 80%; }
+      85%  { background-position: 85% 10%; }
+      100% { background-position: 0% 20%; }
+    }
+
+    .page-header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .page-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 12px;
+    }
+
+    .page-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .page-sub {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.8);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    /* ── NEWS ── */
+    #news {
+      padding: 72px 0 80px;
+      flex: 1;
+    }
+
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .news-card {
+      background: #fff;
+      border-radius: 4px;
+      border-left: 3px solid var(--blue);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      padding: 24px 32px;
+      cursor: pointer;
+      position: relative;
+      transition: box-shadow 0.2s;
+    }
+
+    .news-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    }
+
+    .news-card.expanded {
+      background: var(--bg-muted);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    .news-card-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: none;
+      border: none;
+      font-size: 1.25rem;
+      line-height: 1;
+      color: var(--text-light);
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: color 0.15s, background 0.15s;
+      display: none;
+    }
+    .news-card-close:hover {
+      color: var(--text);
+      background: rgba(0,0,0,0.06);
+    }
+    .news-card.expanded .news-card-close { display: block; }
+
+    .news-card::after {
+      content: 'Read More >';
+      position: absolute;
+      bottom: 8px;
+      right: 14px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--blue);
+      opacity: 0.6;
+      text-transform: uppercase;
+    }
+    .news-card.expanded::after { display: none; }
+
+    .news-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .news-date {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    .news-tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(214,7,7,0.07);
+      padding: 2px 7px;
+      border-radius: 2px;
+    }
+
+    .news-headline {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--blue-dark);
+      line-height: 1.3;
+      margin-bottom: 5px;
+    }
+
+    .news-excerpt {
+      font-size: 0.875rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    .news-body {
+      display: none;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      font-size: 0.875rem;
+      color: var(--text-light);
+      line-height: 1.75;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .news-card.expanded .news-excerpt { display: none; }
+    .news-card.expanded .news-body { display: block; }
+
+    .news-body p + p { margin-top: 14px; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--blue-dark);
+      color: rgba(255,255,255,0.75);
+      padding: 56px 0 32px;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 48px;
+      margin-bottom: 40px;
+    }
+
+    .footer-logo img {
+      height: 36px;
+      width: auto;
+      display: block;
+      margin-bottom: 12px;
+      filter: brightness(0) invert(1);
+    }
+
+    .footer-tagline {
+      font-size: 0.85rem;
+      line-height: 1.65;
+    }
+
+    .footer-heading {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 14px;
+    }
+
+    .footer-links p {
+      font-size: 0.875rem;
+      margin-bottom: 6px;
+    }
+    .footer-links a { color: rgba(255,255,255,0.85); }
+    .footer-links a:hover { color: #fff; }
+
+    .footer-contact p {
+      font-size: 0.875rem;
+      margin-bottom: 6px;
+    }
+
+    .footer-contact a { color: rgba(255,255,255,0.85); }
+    .footer-contact a:hover { color: #fff; }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 24px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    @media (max-width: 700px) {
+      nav { display: none; }
+      .footer-inner { grid-template-columns: 1fr; gap: 36px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><img src="Logo.png" alt="American Viewpoint" /></a>
+      <nav>
+        <a href="index.html#about">About</a>
+        <a href="services.html">Services</a>
+        <a href="team.html">Team</a>
+        <a href="clients.html">Clients</a>
+        <a href="index.html#footer">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PAGE HEADER -->
+  <section id="page-header">
+    <div class="page-header-inner">
+      <p class="page-label">Company</p>
+      <h1 class="page-title">News</h1>
+      <p class="page-sub">Updates, press mentions, and milestones from American Viewpoint.</p>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section id="news">
+    <div class="container">
+      <div class="news-list">
+
+        <div class="news-card">
+          <button class="news-card-close" aria-label="Close">&#x2715;</button>
+          <div class="news-card-meta">
+            <span class="news-date">February 2026</span>
+            <span class="news-tag">Company</span>
+          </div>
+          <div class="news-headline">American Viewpoint Welcomes New Research Analyst</div>
+          <p class="news-excerpt">Ellie Bodman joins the team after interning with the firm through the AAPC Foundation's Lake / DiVall Internship program.</p>
+          <div class="news-body">
+            <p>[Placeholder — expand on Ellie's background, her role at the firm, and any relevant details about her hire.]</p>
+          </div>
+        </div>
+
+        <div class="news-card">
+          <button class="news-card-close" aria-label="Close">&#x2715;</button>
+          <div class="news-card-meta">
+            <span class="news-date">2025</span>
+            <span class="news-tag">Company</span>
+          </div>
+          <div class="news-headline">American Viewpoint Marks 40 Years of Public Opinion Research</div>
+          <p class="news-excerpt">Founded in 1985, American Viewpoint reflects on four decades of political and corporate research — and looks ahead to the next chapter.</p>
+          <div class="news-body">
+            <p>[Placeholder — anniversary statement or retrospective on the firm's history, key milestones, and clients served over 40 years.]</p>
+          </div>
+        </div>
+
+        <div class="news-card">
+          <button class="news-card-close" aria-label="Close">&#x2715;</button>
+          <div class="news-card-meta">
+            <span class="news-date">November 2024</span>
+            <span class="news-tag">Press</span>
+          </div>
+          <div class="news-headline">American Viewpoint Releases Post-Election Analysis</div>
+          <p class="news-excerpt">Following the 2024 election cycle, American Viewpoint shares key findings from its political research work across Senate and gubernatorial races.</p>
+          <div class="news-body">
+            <p>[Placeholder — summary of the firm's 2024 election cycle work, key races polled, accuracy record, and any public commentary or media appearances.]</p>
+          </div>
+        </div>
+
+        <div class="news-card">
+          <button class="news-card-close" aria-label="Close">&#x2715;</button>
+          <div class="news-card-meta">
+            <span class="news-date">[Year]</span>
+            <span class="news-tag">Awards</span>
+          </div>
+          <div class="news-headline">Randall Gutermuth Named to Campaigns &amp; Elections Rising Stars</div>
+          <p class="news-excerpt">American Viewpoint President Randall Gutermuth recognized by Campaigns &amp; Elections magazine for his contributions to political research and dial testing.</p>
+          <div class="news-body">
+            <p>[Placeholder — detail on the award, what it recognizes, and a brief quote or comment from Randall or the firm.]</p>
+          </div>
+        </div>
+
+        <div class="news-card">
+          <button class="news-card-close" aria-label="Close">&#x2715;</button>
+          <div class="news-card-meta">
+            <span class="news-date">[Date]</span>
+            <span class="news-tag">Press</span>
+          </div>
+          <div class="news-headline">Linda DiVall Quoted in [Publication] on Senate Polling Trends</div>
+          <p class="news-excerpt">American Viewpoint founder Linda DiVall shares her analysis of shifting voter sentiment and polling methodology with national media.</p>
+          <div class="news-body">
+            <p>[Placeholder — link to or summary of the press mention, the topic discussed, and any additional context about Linda's commentary.]</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo"><img src="Logo.png" alt="American Viewpoint" /></div>
+          <p class="footer-tagline">Accurate. Attentive. Actionable.<br />Public opinion research since 1985.</p>
+        </div>
+        <div class="footer-links">
+          <p class="footer-heading">Pages</p>
+          <p><a href="services.html">Services</a></p>
+          <p><a href="case-studies.html">Case Studies</a></p>
+          <p><a href="news.html">News</a></p>
+        </div>
+        <div class="footer-contact">
+          <p class="footer-heading">Get In Touch</p>
+          <p>Phone: <a href="tel:7036843325">(703) 684-3325</a></p>
+          <p>Email: <a href="mailto:info@amview.com">info@amview.com</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2018 American Viewpoint, Inc. All rights reserved. American Viewpoint&trade; is a registered trademark.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      document.querySelectorAll('.news-card').forEach(function(card) {
+        card.querySelector('.news-card-close').addEventListener('click', function(e) {
+          e.stopPropagation();
+          card.classList.remove('expanded');
+        });
+
+        card.addEventListener('click', function() {
+          var wasExpanded = card.classList.contains('expanded');
+          document.querySelectorAll('.news-card.expanded').forEach(function(c) {
+            c.classList.remove('expanded');
+          });
+          if (!wasExpanded) {
+            var scrollY = window.scrollY;
+            card.classList.add('expanded');
+            window.scrollTo(0, scrollY);
+          }
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>

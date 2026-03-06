@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -116,13 +116,32 @@
       letter-spacing: -0.01em;
     }
 
-    .hero-tagline span { color: var(--bg); }
+    .hero-line {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: heroLineIn 0.55s ease forwards;
+    }
+    .hero-tagline .hero-line:nth-of-type(1) { animation-delay: 0.15s; }
+    .hero-tagline .hero-line:nth-of-type(2) { animation-delay: 0.38s; }
+    .hero-tagline .hero-line:nth-of-type(3) { animation-delay: 0.61s; }
 
     .hero-sub {
       font-size: 1.1rem;
       color: rgba(255,255,255,0.80);
       max-width: 520px;
       margin: 0 auto 36px;
+      opacity: 0;
+      animation: heroLineIn 0.55s ease 0.84s forwards;
+    }
+
+    .hero-cta {
+      opacity: 0;
+      animation: heroLineIn 0.55s ease 1.05s forwards;
+    }
+
+    @keyframes heroLineIn {
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .btn {
@@ -181,6 +200,7 @@
       font-size: 1rem;
       font-weight: 700;
       text-transform: uppercase;
+      font-style: italic; 
       letter-spacing: 0.1em;
       color: var(--red-dark);
       margin-bottom: 12px;
@@ -239,11 +259,99 @@
       border-top: 3px solid var(--blue);
       box-shadow: 0 1px 4px rgba(0,0,0,0.06);
       transition: box-shadow 0.2s, transform 0.15s;
+      cursor: pointer;
+      position: relative;
     }
 
     .service-card:hover {
       box-shadow: 0 4px 16px rgba(0,0,0,0.10);
       transform: translateY(-2px);
+    }
+
+    /* hide non-expanded cards when any card is open */
+    .services-grid.has-expanded .service-card:not(.expanded) {
+      display: none;
+    }
+
+    /* expanded state */
+    .service-card.expanded {
+      grid-column: 1 / -1;
+      transform: none;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      background: var(--bg-muted);
+      padding: 32px;
+    }
+
+    .service-card-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 1.25rem;
+      line-height: 1;
+      color: var(--text-light);
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: color 0.15s, background 0.15s;
+      display: none;
+    }
+    .service-card-close:hover {
+      color: var(--text);
+      background: rgba(0,0,0,0.06);
+    }
+    .service-card.expanded .service-card-close { display: block; }
+
+    .service-card::after {
+      content: 'Expand >';
+      position: absolute;
+      bottom: 6px;
+      right: 7px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--blue);
+      opacity: 0.6;
+      text-transform: uppercase;
+    }
+
+    .service-card.expanded::after { display: none; }
+
+    .service-detail {
+      font-size: 0.875rem;
+      color: var(--text-light);
+      line-height: 1.75;
+      display: none;
+      margin-top: 12px;
+    }
+
+    .service-card.expanded .service-desc { display: none; }
+
+    .service-card.expanded .service-detail {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .service-methods-link {
+      display: inline-block;
+      margin-top: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--blue);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .service-methods-link:hover {
+      color: var(--blue-dark);
+      border-bottom-color: var(--blue-dark);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     .service-icon {
@@ -416,6 +524,66 @@
     .state-path.flash-blue   { fill: var(--blue); }
     .state-path.flash-purple { fill: var(--purple); }
 
+    /* ── NEWS PREVIEW ── */
+    #news-preview {
+      padding: 64px 0;
+      background: var(--bg-muted);
+    }
+
+    .news-preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+
+    .news-see-all {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--blue);
+      letter-spacing: 0.02em;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .news-see-all:hover {
+      color: var(--blue-dark);
+      border-bottom-color: var(--blue-dark);
+    }
+
+    .news-preview-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      color: inherit;
+      transition: opacity 0.15s;
+    }
+    .news-preview-item:first-child { border-top: 1px solid rgba(0,0,0,0.07); }
+    .news-preview-item:hover { opacity: 0.72; }
+
+    .news-preview-date {
+      flex-shrink: 0;
+      font-size: 0.78rem;
+      color: var(--text-light);
+      font-weight: 500;
+      width: 110px;
+      padding-top: 3px;
+    }
+
+    .news-preview-headline {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 3px;
+    }
+
+    .news-preview-excerpt {
+      font-size: 0.845rem;
+      color: var(--text-light);
+      line-height: 1.55;
+    }
+
     /* ── FOOTER ── */
     footer {
       background: var(--blue-dark);
@@ -425,10 +593,17 @@
 
     .footer-inner {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr auto 1fr;
       gap: 48px;
       margin-bottom: 40px;
     }
+
+    .footer-links p {
+      font-size: 0.875rem;
+      margin-bottom: 6px;
+    }
+    .footer-links a { color: rgba(255,255,255,0.85); }
+    .footer-links a:hover { color: #fff; }
 
     .footer-logo img {
       height: 36px;
@@ -489,7 +664,7 @@
       <a href="#" class="logo"><img src="Logo.png" alt="American Viewpoint" /></a>
       <nav>
         <a href="#about">About</a>
-        <a href="#services">Services</a>
+        <a href="services.html">Services</a>
         <a href="team.html">Team</a>
         <a href="clients.html">Clients</a>
         <a href="#footer">Contact</a>
@@ -501,9 +676,13 @@
   <section id="hero">
     <div class="hero-content">
       <!-- <span class="hero-eyebrow">Public Opinion Research Since 1985</span> -->
-      <h1 class="hero-tagline">Accurate.<br><span>Attentive.</span><br>Actionable.</h1>
+      <h1 class="hero-tagline">
+        <span class="hero-line">Accurate.</span><br>
+        <span class="hero-line">Attentive.</span><br>
+        <span class="hero-line">Actionable.</span>
+      </h1>
       <p class="hero-sub">Public Opinion Research Since 1985</p>
-      <div style="text-align: center;">
+      <div class="hero-cta" style="text-align: center;">
         <a href="team.html" class="btn btn-primary">Meet the Team</a>
       </div>
     </div>
@@ -559,51 +738,160 @@
       <div class="services-grid">
 
         <div class="service-card">
+          <button class="service-card-close" aria-label="Close">&#x2715;</button>
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </div>
           <div class="service-title">Political Research</div>
-          <p class="service-desc">Polling strategy and message testing for campaigns across the country. In addition, we often partner with initiative and referendum campaigns or other public policy advocay.</p>
+          <p class="service-desc">Polling strategy and message testing for campaigns across the country.</p>
+          <div class="service-detail">
+            <p>Since 1985, American Viewpoint has been one of the leading Republican polling firms in the country, with a record of winning difficult races. Having conducted polling for offices ranging from city council to President of the United States, American Viewpoint's data and expertise have proved invaluable in directing campaign messaging, resource allocation and overall strategy.</p>
+            <br/>
+            <p>In political polling, accuracy and winning are the attributes of a successful pollster and American Viewpoint regularly accomplishes both. With past clients including every Presidential nominee since President Reagan, numerous U.S. Senators and Members of Congress as well as several Governors and state legislative caucuses, campaigns can be assured in the accuracy, timeliness and quality of the data and the strategic analysis American Viewpoint provides.</p>
+            <br/>
+            <p>We go beyond the normal delivery of data to provide action-oriented strategic and tactical recommendations and develop vote models by media market and Congressional District for our major statewide races.</p>
+            <a href="services.html" class="service-methods-link">&#8594; Learn about our research methods</a>
+            <a href="case-studies.html" class="service-methods-link" style="margin-left: 20px;">&#8594; Browse case studies</a>
+          </div>
         </div>
 
         <div class="service-card">
+          <button class="service-card-close" aria-label="Close">&#x2715;</button>
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           </div>
           <div class="service-title">Corporate Research</div>
           <p class="service-desc">Strategic insights for Fortune 500 companies, telecommunications firms, insurance providers, and financial institutions.</p>
-        </div>
-
-        <div class="service-card">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <div class="service-detail">
+            <p>American Viewpoint brings the same rigor and strategic insight we apply to political research to the corporate world. We have conducted research for a wide range of industries, including telecommunications, insurance, healthcare, energy, financial services, and more.</p>
+            <br/>
+            <p>Our corporate clients have included Altria, AT&amp;T, Pfizer, Georgia Power, KBR, and many others. We help organizations understand customer and stakeholder perceptions, test communications and messaging, evaluate brand reputation, and inform executive decision-making with reliable, actionable data.</p>
+            <br/>
+            <p>Whether you need a one-time study or an ongoing research relationship, American Viewpoint delivers insights that help corporate clients navigate a complex and competitive landscape.</p>
+            <a href="services.html" class="service-methods-link">&#8594; Learn about our research methods</a>
+            <a href="case-studies.html" class="service-methods-link" style="margin-left: 20px;">&#8594; Browse case studies</a>
           </div>
-          <div class="service-title">Crisis Management</div>
-          <p class="service-desc">Rapid-response research to assess public perception and guide communications during high-stakes situations.</p>
         </div>
 
         <div class="service-card">
+          <button class="service-card-close" aria-label="Close">&#x2715;</button>
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           </div>
-          <div class="service-title">Brand Enhancement</div>
-          <p class="service-desc">Positioning research that helps organizations define, refine, and communicate their brand identity effectively.</p>
+          <div class="service-title">Crisis Management</div>
+          <p class="service-desc">Rapid-response research to assess public perception and guide communications during high-stakes situations.</p>
+          <div class="service-detail">
+            <p>While always important, effective communications are vital during a crisis. American Viewpoint has assisted organizations facing difficult scrutiny by helping guide their communications efforts through a series of surveys, focus groups and dial testing. Some uses of how survey research can be helpful in managing a crisis include:</p>
+            <br/>
+            <p>National Survey - This would gauge awareness of allegations against an organization and how that awareness drives down several reputation measurements. This survey can also test messaging to explain the allegations as well as test the potency of opponents' attacks against the organization in question.</p>
+            <br/>
+            <p>Dial Testing of News Reports - Often news reports, especially news magazine shows such as 60 Minutes, can be very damaging to an organization's reputation and it is essential to be able to quickly and efficiently respond to allegations. These dial tests help gauge the impact of the broadcast and strength of the organization's response.</p>
+            <br/>
+            <p>Opinion Elite Focus Groups - Opinion Elite focus groups are very helpful in crafting responses to various accusations. Opinion leaders are respondents who closely follow the news, are active in their community and are those most likely to influence their friends' and neighbors' perceptions.</p>
+            <br/>
+            <p>With American Viewpoint's background in politics, we understand the importance of difficult timelines and a quick turnaround of accurate and actionable recommendations, especially in a crisis mode.</p>
+            <a href="services.html" class="service-methods-link">&#8594; Learn about our research methods</a>
+            <a href="case-studies.html" class="service-methods-link" style="margin-left: 20px;">&#8594; Browse case studies</a>
+          </div>
         </div>
 
         <div class="service-card">
+          <button class="service-card-close" aria-label="Close">&#x2715;</button>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <div class="service-title">Brand Enhancement</div>
+          <p class="service-desc">Positioning research that helps organizations define, refine, and communicate their brand identity effectively.</p>
+          <div class="service-detail">
+            <p>Strategic branding is critically important in today's competitive marketplace and many companies have selected American Viewpoint to conduct strategic brand research related to:</p>
+            <ul style="margin-top: 12px; margin-left: 24px; line-height: 2; columns: 2; column-gap: 32px;">
+              <li>Brand Assessment</li>
+              <li>External Communications</li>
+              <li>Spokesperson Testing</li>
+              <li>Crisis Communications</li>
+              <li>Brand Impact</li>
+              <li>Use of Social Media and Consumer Engagement</li>
+              <li>Brand Value</li>
+              <li>Positioning</li>
+              <li>Brand Loyalty and Satisfaction</li>
+              <li>Product Testing</li>
+              <li>Concept Testing</li>
+              <li>Advertising Testing</li>
+            </ul>
+            <a href="services.html" class="service-methods-link">&#8594; Learn about our research methods</a>
+            <a href="case-studies.html" class="service-methods-link" style="margin-left: 20px;">&#8594; Browse case studies</a>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <button class="service-card-close" aria-label="Close">&#x2715;</button>
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
           <div class="service-title">Membership Satisfaction</div>
           <p class="service-desc">Surveys and analysis to help associations and nonprofits understand and strengthen member engagement.</p>
+          <div class="service-detail">
+            <p>American Viewpoint has extensive experience conducting membership and customer satisfaction studies in a wide range of fields and specializes in interviewing hard-to-reach audiences. The following are a few examples of the work conducted on behalf of our clients:</p>
+            <br/>
+            <p>Health Insurance Members - American Viewpoint has conducted more than 200,000 member satisfaction interviews for a major health insurance company. The results have been used to rate individual plans, identify members' concerns and test specific plan benefits.</p>
+            <br/>
+            <p>Telecom Customers - American Viewpoint conducted a series of surveys regarding telecommunications products for small businesses. Respondents were decision-makers regarding their companies' telecom plans. The results of these surveys were used to plan a roll out of a telecommunications company's website dedicated to their small business customers as well as to develop messaging to drive customers to pay their bills online.</p>
+            <br/>
+            <p>Doctors and Nurses - American Viewpoint has also conducted hundreds of provider studies including quantitative and qualitative research to assess issues relating to billing, reimbursement and medical care. In another study, a large pharmaceutical company commissioned American Viewpoint to test the performance of hotlines that doctors and nurses used for questions regarding reimbursement issues.</p>
+            <br/>
+            <p>NFL Luxury Ticket-Holders - An NFL team hired American Viewpoint to conduct a series of focus groups with current and potential luxury box and club seat ticket-holders. The findings were used to improve the game day experience for these premium ticket-holders, retain current ticket-holders and sell additional premium tickets. These groups also assisted in designing a new luxury club expansion of the stadium.</p>
+            <br/>
+            <p>Our membership research experience can help you assess the perceptions and potential actions of your members, donors or customers.</p>
+            <a href="services.html" class="service-methods-link">&#8594; Learn about our research methods</a>
+            <a href="case-studies.html" class="service-methods-link" style="margin-left: 20px;">&#8594; Browse case studies</a>
+          </div>
         </div>
 
         <div class="service-card">
+          <button class="service-card-close" aria-label="Close">&#x2715;</button>
           <div class="service-icon">
-            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
           </div>
-          <div class="service-title">Nonprofit &amp; Healthcare</div>
-          <p class="service-desc">Research solutions for hospitals, advocacy organizations, and nonprofits navigating complex public landscapes.</p>
+          <div class="service-title">Healthcare &amp; Insurance Studies</div>
+          <p class="service-desc">Research solutions for hospitals, insurers, advocacy organizations, and nonprofits navigating complex public landscapes.</p>
+          <div class="service-detail">
+            <p>American Viewpoint is one of the leading experts in health care-related research with a client list that has included the Blue Cross Blue Shield Association and other major insurers, Federation of American Hospitals (FAH), AARP, Hospital Corporation of America (HCA), America’s Health Insurance Plans, Pfizer and many others. Very few firms have the depth of knowledge regarding health care that American Viewpoint offers.</p>
+            <br/>
+            <p>Since 1991, we have conducted hundreds of studies in health policy, health communications, member and provider satisfaction and product development. We have extensive knowledge and experience regarding health issues, policies, programs and challenges. Our studies have helped clients assess the legislative environment, launch new products, gauge the impact of changes in benefits, and develop strategies to succeed in the constantly changing health policy environment.</p>
+            <br/>
+            <p>Health care research conducted by American Viewpoint includes:</p>
+            <ul style="margin-top: 12px; margin-left: 24px; line-height: 2;">
+              <li>Extensive surveys and focus groups regarding the Medicare Program</li>
+                          <li>Insurance plan evaluations; Focus groups and surveys of physicians and dentists</li>
+              <li>Policy-related research on Medical Malpractice Reform</li>
+              <li>Advertising testing on behalf of major hospitals</li>
+              <li>Research regarding state Medicaid programs</li>
+            </ul>
+            <br/>
+            <p>Moreover, we have extensive experience in conducting research relating to health insurance issues for a number of major insurers and our studies have examined almost every aspect of the process including:</p>
+            <br/>
+            <ul style="margin-top: 12px; margin-left: 24px; line-height: 2; columns: 2; column-gap: 32px;">
+              <li>Member Satisfaction</li>
+              <li>Provider Satisfaction</li>
+              <li>Benefit Development</li>
+              <li>New Product Development, Classification and Positioning</li>
+              <li>Social Engagement-Opinion Leader Assessment</li>
+              <li>Brand Perception-Reputation and Value Proposition</li>
+              <li>Medicare-Medigap Insurance</li>
+              <li>Small-business Insurance Issues</li>
+              <li>Health Savings Accounts</li>
+              <li>High-Deductible Health Plans</li>
+              <li>Rates and Reserves</li>
+              <li>Supplemental Dental/Vision Insurance</li>
+              <li>Care Coordination/Disease Management</li>
+              <li>Health Insurance Migration</li>
+              <li>Federal Employee Health Benefits Program Research</li>
+            </ul>
+            <br/>
+            <p>Our data have been presented to Members of Congress, the White House, the Office of Personnel Management, and the national press. Our clients have utilized our survey research, focus groups, and audience response dial testing research for program assessment and strategic planning in health public policy, health insurance, hospital issues, health program evaluation and pharmaceutical industry concerns.</p>
+            <a href="services.html" class="service-methods-link">&#8594; Learn about our research methods</a>
+            <a href="case-studies.html" class="service-methods-link" style="margin-left: 20px;">&#8594; Browse case studies</a>
+          </div>
         </div>
 
       </div>
@@ -701,6 +989,39 @@
     </div>
   </section>
 
+  <!-- NEWS PREVIEW -->
+  <section id="news-preview">
+    <div class="container">
+      <div class="news-preview-header">
+        <h2 class="section-title">Latest News</h2>
+        <a href="news.html" class="news-see-all">See all &rarr;</a>
+      </div>
+      <div class="news-preview-list">
+        <a href="news.html" class="news-preview-item">
+          <div class="news-preview-date">February 2026</div>
+          <div class="news-preview-content">
+            <div class="news-preview-headline">American Viewpoint Welcomes New Research Analyst</div>
+            <div class="news-preview-excerpt">Ellie Bodman joins the team after interning with the firm through the AAPC Foundation's Lake / DiVall Internship program.</div>
+          </div>
+        </a>
+        <a href="news.html" class="news-preview-item">
+          <div class="news-preview-date">2025</div>
+          <div class="news-preview-content">
+            <div class="news-preview-headline">American Viewpoint Marks 40 Years of Public Opinion Research</div>
+            <div class="news-preview-excerpt">Founded in 1985, the firm reflects on four decades of political and corporate research.</div>
+          </div>
+        </a>
+        <a href="news.html" class="news-preview-item">
+          <div class="news-preview-date">November 2024</div>
+          <div class="news-preview-content">
+            <div class="news-preview-headline">American Viewpoint Releases Post-Election Analysis</div>
+            <div class="news-preview-excerpt">Key findings from the firm's political research work across Senate and gubernatorial races in the 2024 cycle.</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer id="footer">
     <div class="container">
@@ -708,6 +1029,12 @@
         <div>
           <div class="footer-logo"><img src="Logo.png" alt="American Viewpoint" /></div>
           <p class="footer-tagline">Accurate. Attentive. Actionable.<br />Public opinion research since 1985.</p>
+        </div>
+        <div class="footer-links">
+          <p class="footer-heading">Pages</p>
+          <p><a href="services.html">Services</a></p>
+          <p><a href="case-studies.html">Case Studies</a></p>
+          <p><a href="news.html">News</a></p>
         </div>
         <div class="footer-contact">
           <p class="footer-heading">Get In Touch</p>
@@ -721,6 +1048,45 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var grid = document.querySelector('.services-grid');
+      var pinnedCard = null;
+      var hoverTimeout;
+
+      function expand(card) {
+        clearTimeout(hoverTimeout);
+        document.querySelectorAll('.service-card.expanded').forEach(function(c) {
+          c.classList.remove('expanded');
+        });
+        card.classList.add('expanded');
+        grid.classList.add('has-expanded');
+      }
+
+      function collapse() {
+        document.querySelectorAll('.service-card.expanded').forEach(function(c) {
+          c.classList.remove('expanded');
+        });
+        grid.classList.remove('has-expanded');
+        pinnedCard = null;
+      }
+
+      document.querySelectorAll('.service-card').forEach(function(card) {
+        card.querySelector('.service-card-close').addEventListener('click', function(e) {
+          e.stopPropagation();
+          collapse();
+        });
+
+        card.addEventListener('click', function() {
+          var scrollY = window.scrollY;
+          pinnedCard = card;
+          expand(card);
+          window.scrollTo(0, scrollY);
+        });
+      });
+    })();
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
   <script>
@@ -827,6 +1193,41 @@
           setInterval(flashRandom, 1000);
           flashRandom();
         });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var statEls = document.querySelectorAll('.stat-number');
+      if (!statEls.length) return;
+
+      function animateCount(el) {
+        var target = parseInt(el.textContent, 10);
+        if (isNaN(target)) return;
+        var duration = 1200;
+        var startTime = null;
+
+        function step(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var progress = Math.min((timestamp - startTime) / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.floor(eased * target);
+          if (progress < 1) requestAnimationFrame(step);
+          else el.textContent = target + '+';
+        }
+        requestAnimationFrame(step);
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            animateCount(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      statEls.forEach(function (el) { observer.observe(el); });
     })();
   </script>
 
