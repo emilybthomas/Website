@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Services — American Viewpoint</title>
+  <title>Research Services — American Viewpoint</title>
+  <meta name="description" content="American Viewpoint offers quantitative surveys, focus groups, dial testing, online ad testing, and QualBoards for political and corporate research." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Research Services — American Viewpoint" />
+  <meta property="og:description" content="Quantitative surveys, focus groups, dial testing, online ad testing, and QualBoards for political and corporate clients." />
+  <meta property="og:image" content="Logo.png" />
+  <link rel="canonical" href="https://www.amview.com/services.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -162,7 +168,8 @@
       position: relative;
     }
 
-    .service-card:hover {
+    .service-card:hover,
+    .service-card:active {
       box-shadow: 0 4px 16px rgba(0,0,0,0.10);
       transform: translateY(-2px);
     }
@@ -191,12 +198,15 @@
       line-height: 1;
       color: var(--text-light);
       cursor: pointer;
-      padding: 4px 8px;
+      padding: 12px 16px;
+      min-width: 44px;
+      min-height: 44px;
       border-radius: 4px;
       transition: color 0.15s, background 0.15s;
       display: none;
     }
-    .service-card-close:hover {
+    .service-card-close:hover,
+    .service-card-close:active {
       color: var(--text);
       background: rgba(0,0,0,0.06);
     }
@@ -329,8 +339,89 @@
       color: rgba(255,255,255,0.4);
     }
 
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
+    .reveal-d5 { transition-delay: 0.5s; }
+
+    /* ── HEADER SCROLL SHADOW ── */
+    header { transition: box-shadow 0.3s ease; }
+    header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.10); }
+
+    /* ── MOBILE NAV ── */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+    }
+    .nav-toggle span {
+      display: block;
+      height: 2px;
+      background: var(--blue-dark);
+      border-radius: 2px;
+    }
+    .nav-drawer {
+      position: fixed;
+      top: 0; right: 0;
+      height: 100%;
+      width: 260px;
+      background: var(--bg);
+      box-shadow: -4px 0 24px rgba(0,0,0,0.12);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      padding: 80px 32px 40px;
+      gap: 28px;
+      transform: translateX(100%);
+      transition: transform 0.25s ease;
+    }
+    .nav-drawer.open { transform: translateX(0); }
+    .nav-drawer a {
+      color: var(--blue-dark);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .nav-drawer a:hover { color: var(--red-dark); }
+    .nav-drawer-close {
+      position: absolute;
+      top: 24px; right: 24px;
+      background: none;
+      border: none;
+      font-size: 1.75rem;
+      cursor: pointer;
+      color: var(--text-light);
+      line-height: 1;
+      padding: 8px;
+    }
+    .nav-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      z-index: 199;
+    }
+    .nav-backdrop.open { display: block; }
+
     @media (max-width: 700px) {
       nav { display: none; }
+      .nav-toggle { display: flex; }
       .services-grid { grid-template-columns: 1fr; }
       .footer-inner { grid-template-columns: 1fr; gap: 36px; }
     }
@@ -349,15 +440,27 @@
         <a href="clients.html">Clients</a>
         <a href="index.html#footer">Contact</a>
       </nav>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-drawer" id="navDrawer">
+        <button class="nav-drawer-close" aria-label="Close menu">&times;</button>
+        <a href="index.html#about">About</a>
+        <a href="services.html">Services</a>
+        <a href="team.html">Team</a>
+        <a href="clients.html">Clients</a>
+        <a href="index.html#footer">Contact</a>
+      </div>
+      <div class="nav-backdrop" id="navBackdrop"></div>
     </div>
   </header>
 
   <!-- PAGE HEADER -->
   <section id="page-header">
     <div class="page-header-inner">
-      <p class="page-label">How We Work</p>
-      <h1 class="page-title">Our Research Methods</h1>
-      <p class="page-sub">American Viewpoint employs a full range of quantitative and qualitative research tools to deliver accurate, actionable insights for political and corporate clients.</p>
+      <p class="page-label reveal">How We Work</p>
+      <h1 class="page-title reveal reveal-d1">Our Research Methods</h1>
+      <p class="page-sub reveal reveal-d2">American Viewpoint employs a full range of quantitative and qualitative research tools to deliver accurate, actionable insights for political and corporate clients.</p>
     </div>
   </section>
 
@@ -366,12 +469,12 @@
     <div class="container">
       <div class="services-grid">
 
-        <div class="service-card">
+        <div class="service-card reveal reveal-d1">
           <button class="service-card-close" aria-label="Close">&#x2715;</button>
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><rect x="3" y="12" width="3" height="8"/><rect x="9" y="8" width="3" height="12"/><rect x="15" y="4" width="3" height="16"/></svg>
           </div>
-          <div class="service-title">Quantitative Surveys</div>
+          <h3 class="service-title">Quantitative Surveys</h3>
           <p class="service-desc">Large-scale telephone and mixed-mode surveys that deliver statistically representative data on public opinion and voter preferences.</p>
           <div class="service-detail">
             <p>Quantitative surveys are the foundation of American Viewpoint's research practice. We design and field large-scale telephone and mixed-mode surveys that produce statistically representative samples, giving clients reliable data on public opinion, voter preferences, message effectiveness, and market perceptions.</p>
@@ -382,12 +485,12 @@
           </div>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal reveal-d2">
           <button class="service-card-close" aria-label="Close">&#x2715;</button>
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           </div>
-          <div class="service-title">Online Surveys</div>
+          <h3 class="service-title">Online Surveys</h3>
           <p class="service-desc">Web-based surveys that efficiently reach targeted audiences with speed and cost-effectiveness for fast-moving campaigns and organizations.</p>
           <div class="service-detail">
             <p>Online surveys provide a fast, cost-effective way to gather high-quality data from targeted audiences. American Viewpoint designs and fields web-based studies for message testing, issue tracking, brand perception research, and more — delivering results on the timelines that campaigns and organizations demand.</p>
@@ -398,12 +501,12 @@
           </div>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal reveal-d3">
           <button class="service-card-close" aria-label="Close">&#x2715;</button>
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
-          <div class="service-title">Focus Groups</div>
+          <h3 class="service-title">Focus Groups</h3>
           <p class="service-desc">In-depth qualitative discussions that uncover the "why" behind public attitudes and help clients refine messaging and explore new concepts.</p>
           <div class="service-detail">
             <p>Focus groups are an essential complement to quantitative research, providing the qualitative depth that surveys alone cannot capture. American Viewpoint conducts both in-person and online focus groups with carefully recruited respondents who reflect the audiences our clients need to understand.</p>
@@ -414,12 +517,12 @@
           </div>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal reveal-d1">
           <button class="service-card-close" aria-label="Close">&#x2715;</button>
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </div>
-          <div class="service-title">Dial Testing</div>
+          <h3 class="service-title">Dial Testing</h3>
           <p class="service-desc">Real-time audience response research using the Perception Analyzer&trade; system to measure moment-by-moment reactions to speeches, ads, and media content.</p>
           <div class="service-detail">
             <p>Dial testing — also known as Perception Analyzer&trade; research — gives clients an unparalleled look at how audiences respond to content in real time. Participants turn a handheld dial continuously as they watch a speech, advertisement, debate, or news broadcast, registering their moment-by-moment reactions on a scale from strongly negative to strongly positive.</p>
@@ -430,12 +533,12 @@
           </div>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal reveal-d2">
           <button class="service-card-close" aria-label="Close">&#x2715;</button>
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           </div>
-          <div class="service-title">Online Ad Testing</div>
+          <h3 class="service-title">Online Ad Testing</h3>
           <p class="service-desc">Digital ad testing that measures recall, favorability, persuasion, and message clarity to optimize creative before it goes live.</p>
           <div class="service-detail">
             <p>Online ad testing allows campaigns and organizations to evaluate the effectiveness of digital advertising before committing to a full buy. American Viewpoint presents respondents with ads in a simulated online environment and measures a comprehensive set of metrics including recall, message clarity, favorability, and persuasion.</p>
@@ -446,12 +549,12 @@
           </div>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal reveal-d3">
           <button class="service-card-close" aria-label="Close">&#x2715;</button>
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           </div>
-          <div class="service-title">QualBoards</div>
+          <h3 class="service-title">QualBoards</h3>
           <p class="service-desc">Asynchronous online focus groups that deliver qualitative depth while enabling hard-to-reach audiences to participate on their own schedule.</p>
           <div class="service-detail">
             <p>QualBoards are an innovative asynchronous online research format that combines the depth of focus groups with the flexibility of digital platforms. Rather than gathering respondents together at a single time, participants engage with questions, prompts, and discussions over multiple days — logging in on their own schedule to respond and interact.</p>
@@ -494,7 +597,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        &copy; 2018 American Viewpoint, Inc. All rights reserved. American Viewpoint&trade; is a registered trademark.
+        &copy; 2025 American Viewpoint, Inc. All rights reserved. American Viewpoint&trade; is a registered trademark.
       </div>
     </div>
   </footer>
@@ -530,6 +633,45 @@
           window.scrollTo(0, scrollY);
         });
       });
+    })();
+  </script>
+
+  <script>
+    (function() {
+      var hdr = document.querySelector('header');
+      window.addEventListener('scroll', function() {
+        hdr.classList.toggle('scrolled', window.scrollY > 10);
+      }, { passive: true });
+      var els = document.querySelectorAll('.reveal');
+      if (!els.length) return;
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(function(el) { obs.observe(el); });
+    })();
+  </script>
+
+  <script>
+    (function() {
+      var toggle = document.querySelector('.nav-toggle');
+      var drawer = document.getElementById('navDrawer');
+      var backdrop = document.getElementById('navBackdrop');
+      function openMenu() {
+        drawer.classList.add('open');
+        backdrop.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+      function closeMenu() {
+        drawer.classList.remove('open');
+        backdrop.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+      toggle.addEventListener('click', openMenu);
+      backdrop.addEventListener('click', closeMenu);
+      drawer.querySelector('.nav-drawer-close').addEventListener('click', closeMenu);
+      drawer.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
     })();
   </script>
 

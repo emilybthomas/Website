@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Case Studies — American Viewpoint</title>
+  <meta name="description" content="Explore how American Viewpoint's research has informed campaign strategy, shaped corporate communications, and helped clients win." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Case Studies — American Viewpoint" />
+  <meta property="og:description" content="Research engagements showing how American Viewpoint's work has informed strategy, shaped communications, and helped clients win." />
+  <meta property="og:image" content="Logo.png" />
+  <link rel="canonical" href="https://www.amview.com/case-studies.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -141,7 +147,8 @@
       transition: box-shadow 0.2s;
     }
 
-    .case-card:hover {
+    .case-card:hover,
+    .case-card:active {
       box-shadow: 0 4px 16px rgba(0,0,0,0.10);
     }
 
@@ -160,12 +167,15 @@
       line-height: 1;
       color: var(--text-light);
       cursor: pointer;
-      padding: 4px 8px;
+      padding: 12px 16px;
+      min-width: 44px;
+      min-height: 44px;
       border-radius: 4px;
       transition: color 0.15s, background 0.15s;
       display: none;
     }
-    .case-card-close:hover {
+    .case-card-close:hover,
+    .case-card-close:active {
       color: var(--text);
       background: rgba(0,0,0,0.06);
     }
@@ -316,8 +326,89 @@
       color: rgba(255,255,255,0.4);
     }
 
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
+    .reveal-d5 { transition-delay: 0.5s; }
+
+    /* ── HEADER SCROLL SHADOW ── */
+    header { transition: box-shadow 0.3s ease; }
+    header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.10); }
+
+    /* ── MOBILE NAV ── */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+    }
+    .nav-toggle span {
+      display: block;
+      height: 2px;
+      background: var(--blue-dark);
+      border-radius: 2px;
+    }
+    .nav-drawer {
+      position: fixed;
+      top: 0; right: 0;
+      height: 100%;
+      width: 260px;
+      background: var(--bg);
+      box-shadow: -4px 0 24px rgba(0,0,0,0.12);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      padding: 80px 32px 40px;
+      gap: 28px;
+      transform: translateX(100%);
+      transition: transform 0.25s ease;
+    }
+    .nav-drawer.open { transform: translateX(0); }
+    .nav-drawer a {
+      color: var(--blue-dark);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .nav-drawer a:hover { color: var(--red-dark); }
+    .nav-drawer-close {
+      position: absolute;
+      top: 24px; right: 24px;
+      background: none;
+      border: none;
+      font-size: 1.75rem;
+      cursor: pointer;
+      color: var(--text-light);
+      line-height: 1;
+      padding: 8px;
+    }
+    .nav-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      z-index: 199;
+    }
+    .nav-backdrop.open { display: block; }
+
     @media (max-width: 700px) {
       nav { display: none; }
+      .nav-toggle { display: flex; }
       .footer-inner { grid-template-columns: 1fr; gap: 36px; }
     }
   </style>
@@ -335,15 +426,27 @@
         <a href="clients.html">Clients</a>
         <a href="index.html#footer">Contact</a>
       </nav>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-drawer" id="navDrawer">
+        <button class="nav-drawer-close" aria-label="Close menu">&times;</button>
+        <a href="index.html#about">About</a>
+        <a href="services.html">Services</a>
+        <a href="team.html">Team</a>
+        <a href="clients.html">Clients</a>
+        <a href="index.html#footer">Contact</a>
+      </div>
+      <div class="nav-backdrop" id="navBackdrop"></div>
     </div>
   </header>
 
   <!-- PAGE HEADER -->
   <section id="page-header">
     <div class="page-header-inner">
-      <p class="page-label">Our Work</p>
-      <h1 class="page-title">Case Studies</h1>
-      <p class="page-sub">A selection of research engagements illustrating how American Viewpoint's work has informed strategy, shaped communications, and helped clients win.</p>
+      <p class="page-label reveal">Our Work</p>
+      <h1 class="page-title reveal reveal-d1">Case Studies</h1>
+      <p class="page-sub reveal reveal-d2">A selection of research engagements illustrating how American Viewpoint's work has informed strategy, shaped communications, and helped clients win.</p>
     </div>
   </section>
 
@@ -352,11 +455,11 @@
     <div class="container">
       <div class="case-studies-list">
 
-        <div class="case-card">
+        <div class="case-card reveal reveal-d1">
           <button class="case-card-close" aria-label="Close">&#x2715;</button>
           <div class="case-card-header">
             <span class="case-tag">Political Research</span>
-            <div class="case-headline">Statewide Senate Campaign — Midwest</div>
+            <h3 class="case-headline">Statewide Senate Campaign — Midwest</h3>
           </div>
           <p class="case-summary">Benchmark and tracking polling that guided resource allocation and message strategy in a competitive open-seat Senate race.</p>
           <div class="case-detail">
@@ -375,11 +478,11 @@
           </div>
         </div>
 
-        <div class="case-card">
+        <div class="case-card reveal reveal-d1">
           <button class="case-card-close" aria-label="Close">&#x2715;</button>
           <div class="case-card-header">
             <span class="case-tag">Corporate Research</span>
-            <div class="case-headline">Telecommunications Company — Brand &amp; Messaging Research</div>
+            <h3 class="case-headline">Telecommunications Company — Brand &amp; Messaging Research</h3>
           </div>
           <p class="case-summary">A series of quantitative and qualitative studies to assess brand perception and guide communications strategy for a major telecom provider.</p>
           <div class="case-detail">
@@ -398,11 +501,11 @@
           </div>
         </div>
 
-        <div class="case-card">
+        <div class="case-card reveal reveal-d1">
           <button class="case-card-close" aria-label="Close">&#x2715;</button>
           <div class="case-card-header">
             <span class="case-tag">Crisis Management</span>
-            <div class="case-headline">Rapid-Response Reputation Study — National Organization</div>
+            <h3 class="case-headline">Rapid-Response Reputation Study — National Organization</h3>
           </div>
           <p class="case-summary">Emergency research designed to assess public awareness of allegations and test communications responses under a compressed timeline.</p>
           <div class="case-detail">
@@ -421,11 +524,11 @@
           </div>
         </div>
 
-        <div class="case-card">
+        <div class="case-card reveal reveal-d1">
           <button class="case-card-close" aria-label="Close">&#x2715;</button>
           <div class="case-card-header">
             <span class="case-tag">Healthcare &amp; Insurance</span>
-            <div class="case-headline">Health Insurance Member Satisfaction Study</div>
+            <h3 class="case-headline">Health Insurance Member Satisfaction Study</h3>
           </div>
           <p class="case-summary">Large-scale member satisfaction research for a major health insurer, producing ratings by plan and actionable recommendations for benefit development.</p>
           <div class="case-detail">
@@ -444,11 +547,11 @@
           </div>
         </div>
 
-        <div class="case-card">
+        <div class="case-card reveal reveal-d1">
           <button class="case-card-close" aria-label="Close">&#x2715;</button>
           <div class="case-card-header">
             <span class="case-tag">Membership Satisfaction</span>
-            <div class="case-headline">Professional Association — National Membership Survey</div>
+            <h3 class="case-headline">Professional Association — National Membership Survey</h3>
           </div>
           <p class="case-summary">Comprehensive membership satisfaction and engagement study for a national professional association, informing strategic planning and member retention efforts.</p>
           <div class="case-detail">
@@ -492,7 +595,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        &copy; 2018 American Viewpoint, Inc. All rights reserved. American Viewpoint&trade; is a registered trademark.
+        &copy; 2025 American Viewpoint, Inc. All rights reserved. American Viewpoint&trade; is a registered trademark.
       </div>
     </div>
   </footer>
@@ -517,6 +620,45 @@
           }
         });
       });
+    })();
+  </script>
+
+  <script>
+    (function() {
+      var hdr = document.querySelector('header');
+      window.addEventListener('scroll', function() {
+        hdr.classList.toggle('scrolled', window.scrollY > 10);
+      }, { passive: true });
+      var els = document.querySelectorAll('.reveal');
+      if (!els.length) return;
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(function(el) { obs.observe(el); });
+    })();
+  </script>
+
+  <script>
+    (function() {
+      var toggle = document.querySelector('.nav-toggle');
+      var drawer = document.getElementById('navDrawer');
+      var backdrop = document.getElementById('navBackdrop');
+      function openMenu() {
+        drawer.classList.add('open');
+        backdrop.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+      function closeMenu() {
+        drawer.classList.remove('open');
+        backdrop.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+      toggle.addEventListener('click', openMenu);
+      backdrop.addEventListener('click', closeMenu);
+      drawer.querySelector('.nav-drawer-close').addEventListener('click', closeMenu);
+      drawer.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
     })();
   </script>
 

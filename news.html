@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>News — American Viewpoint</title>
+  <title>News & Press — American Viewpoint</title>
+  <meta name="description" content="News, press mentions, and company milestones from American Viewpoint, one of America's leading political and corporate research firms." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="News & Press — American Viewpoint" />
+  <meta property="og:description" content="News, press mentions, and company milestones from American Viewpoint." />
+  <meta property="og:image" content="Logo.png" />
+  <link rel="canonical" href="https://www.amview.com/news.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -153,7 +159,8 @@
       transition: box-shadow 0.2s;
     }
 
-    .news-card:hover {
+    .news-card:hover,
+    .news-card:active {
       box-shadow: 0 4px 16px rgba(0,0,0,0.10);
     }
 
@@ -172,12 +179,15 @@
       line-height: 1;
       color: var(--text-light);
       cursor: pointer;
-      padding: 4px 8px;
+      padding: 12px 16px;
+      min-width: 44px;
+      min-height: 44px;
       border-radius: 4px;
       transition: color 0.15s, background 0.15s;
       display: none;
     }
-    .news-card-close:hover {
+    .news-card-close:hover,
+    .news-card-close:active {
       color: var(--text);
       background: rgba(0,0,0,0.06);
     }
@@ -314,8 +324,89 @@
       color: rgba(255,255,255,0.4);
     }
 
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
+    .reveal-d5 { transition-delay: 0.5s; }
+
+    /* ── HEADER SCROLL SHADOW ── */
+    header { transition: box-shadow 0.3s ease; }
+    header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.10); }
+
+    /* ── MOBILE NAV ── */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+    }
+    .nav-toggle span {
+      display: block;
+      height: 2px;
+      background: var(--blue-dark);
+      border-radius: 2px;
+    }
+    .nav-drawer {
+      position: fixed;
+      top: 0; right: 0;
+      height: 100%;
+      width: 260px;
+      background: var(--bg);
+      box-shadow: -4px 0 24px rgba(0,0,0,0.12);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      padding: 80px 32px 40px;
+      gap: 28px;
+      transform: translateX(100%);
+      transition: transform 0.25s ease;
+    }
+    .nav-drawer.open { transform: translateX(0); }
+    .nav-drawer a {
+      color: var(--blue-dark);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .nav-drawer a:hover { color: var(--red-dark); }
+    .nav-drawer-close {
+      position: absolute;
+      top: 24px; right: 24px;
+      background: none;
+      border: none;
+      font-size: 1.75rem;
+      cursor: pointer;
+      color: var(--text-light);
+      line-height: 1;
+      padding: 8px;
+    }
+    .nav-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      z-index: 199;
+    }
+    .nav-backdrop.open { display: block; }
+
     @media (max-width: 700px) {
       nav { display: none; }
+      .nav-toggle { display: flex; }
       .footer-inner { grid-template-columns: 1fr; gap: 36px; }
     }
   </style>
@@ -333,15 +424,27 @@
         <a href="clients.html">Clients</a>
         <a href="index.html#footer">Contact</a>
       </nav>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-drawer" id="navDrawer">
+        <button class="nav-drawer-close" aria-label="Close menu">&times;</button>
+        <a href="index.html#about">About</a>
+        <a href="services.html">Services</a>
+        <a href="team.html">Team</a>
+        <a href="clients.html">Clients</a>
+        <a href="index.html#footer">Contact</a>
+      </div>
+      <div class="nav-backdrop" id="navBackdrop"></div>
     </div>
   </header>
 
   <!-- PAGE HEADER -->
   <section id="page-header">
     <div class="page-header-inner">
-      <p class="page-label">Company</p>
-      <h1 class="page-title">News</h1>
-      <p class="page-sub">Updates, press mentions, and milestones from American Viewpoint.</p>
+      <p class="page-label reveal">Company</p>
+      <h1 class="page-title reveal reveal-d1">News</h1>
+      <p class="page-sub reveal reveal-d2">Updates, press mentions, and milestones from American Viewpoint.</p>
     </div>
   </section>
 
@@ -350,65 +453,65 @@
     <div class="container">
       <div class="news-list">
 
-        <div class="news-card">
+        <div class="news-card reveal reveal-d1">
           <button class="news-card-close" aria-label="Close">&#x2715;</button>
           <div class="news-card-meta">
             <span class="news-date">February 2026</span>
             <span class="news-tag">Company</span>
           </div>
-          <div class="news-headline">American Viewpoint Welcomes New Research Analyst</div>
+          <h3 class="news-headline">American Viewpoint Welcomes New Research Analyst</h3>
           <p class="news-excerpt">Ellie Bodman joins the team after interning with the firm through the AAPC Foundation's Lake / DiVall Internship program.</p>
           <div class="news-body">
             <p>[Placeholder — expand on Ellie's background, her role at the firm, and any relevant details about her hire.]</p>
           </div>
         </div>
 
-        <div class="news-card">
+        <div class="news-card reveal reveal-d1">
           <button class="news-card-close" aria-label="Close">&#x2715;</button>
           <div class="news-card-meta">
             <span class="news-date">2025</span>
             <span class="news-tag">Company</span>
           </div>
-          <div class="news-headline">American Viewpoint Marks 40 Years of Public Opinion Research</div>
+          <h3 class="news-headline">American Viewpoint Marks 40 Years of Public Opinion Research</h3>
           <p class="news-excerpt">Founded in 1985, American Viewpoint reflects on four decades of political and corporate research — and looks ahead to the next chapter.</p>
           <div class="news-body">
             <p>[Placeholder — anniversary statement or retrospective on the firm's history, key milestones, and clients served over 40 years.]</p>
           </div>
         </div>
 
-        <div class="news-card">
+        <div class="news-card reveal reveal-d1">
           <button class="news-card-close" aria-label="Close">&#x2715;</button>
           <div class="news-card-meta">
             <span class="news-date">November 2024</span>
             <span class="news-tag">Press</span>
           </div>
-          <div class="news-headline">American Viewpoint Releases Post-Election Analysis</div>
+          <h3 class="news-headline">American Viewpoint Releases Post-Election Analysis</h3>
           <p class="news-excerpt">Following the 2024 election cycle, American Viewpoint shares key findings from its political research work across Senate and gubernatorial races.</p>
           <div class="news-body">
             <p>[Placeholder — summary of the firm's 2024 election cycle work, key races polled, accuracy record, and any public commentary or media appearances.]</p>
           </div>
         </div>
 
-        <div class="news-card">
+        <div class="news-card reveal reveal-d1">
           <button class="news-card-close" aria-label="Close">&#x2715;</button>
           <div class="news-card-meta">
             <span class="news-date">[Year]</span>
             <span class="news-tag">Awards</span>
           </div>
-          <div class="news-headline">Randall Gutermuth Named to Campaigns &amp; Elections Rising Stars</div>
+          <h3 class="news-headline">Randall Gutermuth Named to Campaigns &amp; Elections Rising Stars</h3>
           <p class="news-excerpt">American Viewpoint President Randall Gutermuth recognized by Campaigns &amp; Elections magazine for his contributions to political research and dial testing.</p>
           <div class="news-body">
             <p>[Placeholder — detail on the award, what it recognizes, and a brief quote or comment from Randall or the firm.]</p>
           </div>
         </div>
 
-        <div class="news-card">
+        <div class="news-card reveal reveal-d1">
           <button class="news-card-close" aria-label="Close">&#x2715;</button>
           <div class="news-card-meta">
             <span class="news-date">[Date]</span>
             <span class="news-tag">Press</span>
           </div>
-          <div class="news-headline">Linda DiVall Quoted in [Publication] on Senate Polling Trends</div>
+          <h3 class="news-headline">Linda DiVall Quoted in [Publication] on Senate Polling Trends</h3>
           <p class="news-excerpt">American Viewpoint founder Linda DiVall shares her analysis of shifting voter sentiment and polling methodology with national media.</p>
           <div class="news-body">
             <p>[Placeholder — link to or summary of the press mention, the topic discussed, and any additional context about Linda's commentary.]</p>
@@ -440,7 +543,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        &copy; 2018 American Viewpoint, Inc. All rights reserved. American Viewpoint&trade; is a registered trademark.
+        &copy; 2025 American Viewpoint, Inc. All rights reserved. American Viewpoint&trade; is a registered trademark.
       </div>
     </div>
   </footer>
@@ -465,6 +568,45 @@
           }
         });
       });
+    })();
+  </script>
+
+  <script>
+    (function() {
+      var hdr = document.querySelector('header');
+      window.addEventListener('scroll', function() {
+        hdr.classList.toggle('scrolled', window.scrollY > 10);
+      }, { passive: true });
+      var els = document.querySelectorAll('.reveal');
+      if (!els.length) return;
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(function(el) { obs.observe(el); });
+    })();
+  </script>
+
+  <script>
+    (function() {
+      var toggle = document.querySelector('.nav-toggle');
+      var drawer = document.getElementById('navDrawer');
+      var backdrop = document.getElementById('navBackdrop');
+      function openMenu() {
+        drawer.classList.add('open');
+        backdrop.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+      function closeMenu() {
+        drawer.classList.remove('open');
+        backdrop.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+      toggle.addEventListener('click', openMenu);
+      backdrop.addEventListener('click', closeMenu);
+      drawer.querySelector('.nav-drawer-close').addEventListener('click', closeMenu);
+      drawer.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
     })();
   </script>
 

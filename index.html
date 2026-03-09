@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>American Viewpoint</title>
+  <title>American Viewpoint — Political & Corporate Opinion Research</title>
+  <meta name="description" content="American Viewpoint delivers accurate, actionable public opinion research for political campaigns and corporate clients. Serving leaders since 1985." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="American Viewpoint — Political & Corporate Opinion Research" />
+  <meta property="og:description" content="Accurate, actionable public opinion research for political campaigns and corporate clients. Serving leaders since 1985." />
+  <meta property="og:image" content="Logo.png" />
+  <link rel="canonical" href="https://www.amview.com/index.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -233,6 +239,12 @@
       color: var(--text-light);
       font-weight: 500;
     }
+
+    .stat-plus {
+      opacity: 0;
+      transition: opacity 0.7s ease;
+    }
+    .stat-plus.visible { opacity: 1; }
 
     /* ── SERVICES ── */
     #services {
@@ -642,9 +654,90 @@
       color: rgba(255,255,255,0.4);
     }
 
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
+    .reveal-d5 { transition-delay: 0.5s; }
+
+    /* ── HEADER SCROLL SHADOW ── */
+    header { transition: box-shadow 0.3s ease; }
+    header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.10); }
+
+    /* ── MOBILE NAV ── */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+    }
+    .nav-toggle span {
+      display: block;
+      height: 2px;
+      background: var(--blue-dark);
+      border-radius: 2px;
+    }
+    .nav-drawer {
+      position: fixed;
+      top: 0; right: 0;
+      height: 100%;
+      width: 260px;
+      background: var(--bg);
+      box-shadow: -4px 0 24px rgba(0,0,0,0.12);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      padding: 80px 32px 40px;
+      gap: 28px;
+      transform: translateX(100%);
+      transition: transform 0.25s ease;
+    }
+    .nav-drawer.open { transform: translateX(0); }
+    .nav-drawer a {
+      color: var(--blue-dark);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .nav-drawer a:hover { color: var(--red-dark); }
+    .nav-drawer-close {
+      position: absolute;
+      top: 24px; right: 24px;
+      background: none;
+      border: none;
+      font-size: 1.75rem;
+      cursor: pointer;
+      color: var(--text-light);
+      line-height: 1;
+      padding: 8px;
+    }
+    .nav-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      z-index: 199;
+    }
+    .nav-backdrop.open { display: block; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 700px) {
       nav { display: none; }
+      .nav-toggle { display: flex; }
 
       .about-grid,
       .testimonials-grid,
@@ -669,6 +762,18 @@
         <a href="clients.html">Clients</a>
         <a href="#footer">Contact</a>
       </nav>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-drawer" id="navDrawer">
+        <button class="nav-drawer-close" aria-label="Close menu">&times;</button>
+        <a href="#about">About</a>
+        <a href="services.html">Services</a>
+        <a href="team.html">Team</a>
+        <a href="clients.html">Clients</a>
+        <a href="#footer">Contact</a>
+      </div>
+      <div class="nav-backdrop" id="navBackdrop"></div>
     </div>
   </header>
 
@@ -692,14 +797,14 @@
   <section id="about">
     <div class="container">
       <div class="about-grid">
-        <div>
+        <div class="reveal">
           <!-- <p class="section-label">Who We Are</p> -->
           <h2 class="section-title">Experts in the Field</h2>
           <p class="about-body">Since being founded in 1985 by Linda DiVall, American Viewpoint has become one of the most widely respected public opinion research firms in the country. American Viewpoint has a wide range of experience conducting research for corporate clients such as hospitals, insurance companies, telecommunications companies and non-profit organizations. Numerous corporations and organizations have also depended on American Viewpoint to help solve issues ranging from crisis management to brand development to membership satisfaction. American Viewpoint has served on the polling team of nearly every Republican Presidential nominee since President Reagan and has helped elect countless U.S. Senators, Members of Congress, Governors and other elected officials across the country.</p>
           <br />
           <!-- <p class="about-body">Our team brings deep expertise in survey design, message testing, focus groups, and strategic analysis. We don't just report numbers — we translate data into actionable strategy.</p> -->
         </div>
-        <div>
+        <div class="reveal reveal-d2">
           <p class="stats-heading">Since 2022...</p>
           <div class="stats-grid">
             <!-- <div class="stat-card">
@@ -731,13 +836,13 @@
   <!-- SERVICES -->
   <section id="services">
     <div class="container">
-      <div class="services-header">
+      <div class="services-header reveal">
         <!-- <p class="section-label">What We Do</p> -->
         <h2 class="section-title">Practice Areas</h2>
       </div>
       <div class="services-grid">
 
-        <div class="service-card">
+        <div class="service-card reveal reveal-d1">
           <button class="service-card-close" aria-label="Close">&#x2715;</button>
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
@@ -755,7 +860,7 @@
           </div>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal reveal-d2">
           <button class="service-card-close" aria-label="Close">&#x2715;</button>
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
@@ -773,7 +878,7 @@
           </div>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal reveal-d3">
           <button class="service-card-close" aria-label="Close">&#x2715;</button>
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -795,7 +900,7 @@
           </div>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal reveal-d1">
           <button class="service-card-close" aria-label="Close">&#x2715;</button>
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
@@ -823,7 +928,7 @@
           </div>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal reveal-d2">
           <button class="service-card-close" aria-label="Close">&#x2715;</button>
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -847,7 +952,7 @@
           </div>
         </div>
 
-        <div class="service-card">
+        <div class="service-card reveal reveal-d3">
           <button class="service-card-close" aria-label="Close">&#x2715;</button>
           <div class="service-icon">
             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
@@ -997,21 +1102,21 @@
         <a href="news.html" class="news-see-all">See all &rarr;</a>
       </div>
       <div class="news-preview-list">
-        <a href="news.html" class="news-preview-item">
+        <a href="news.html" class="news-preview-item reveal reveal-d1">
           <div class="news-preview-date">February 2026</div>
           <div class="news-preview-content">
             <div class="news-preview-headline">American Viewpoint Welcomes New Research Analyst</div>
             <div class="news-preview-excerpt">Ellie Bodman joins the team after interning with the firm through the AAPC Foundation's Lake / DiVall Internship program.</div>
           </div>
         </a>
-        <a href="news.html" class="news-preview-item">
+        <a href="news.html" class="news-preview-item reveal reveal-d2">
           <div class="news-preview-date">2025</div>
           <div class="news-preview-content">
             <div class="news-preview-headline">American Viewpoint Marks 40 Years of Public Opinion Research</div>
             <div class="news-preview-excerpt">Founded in 1985, the firm reflects on four decades of political and corporate research.</div>
           </div>
         </a>
-        <a href="news.html" class="news-preview-item">
+        <a href="news.html" class="news-preview-item reveal reveal-d3">
           <div class="news-preview-date">November 2024</div>
           <div class="news-preview-content">
             <div class="news-preview-headline">American Viewpoint Releases Post-Election Analysis</div>
@@ -1043,7 +1148,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        &copy; 2018 American Viewpoint, Inc. All rights reserved. American Viewpoint&trade; is a registered trademark.
+        &copy; 2025 American Viewpoint, Inc. All rights reserved. American Viewpoint&trade; is a registered trademark.
       <!-- enote is 2018 correct? -->
       </div>
     </div>
@@ -1207,13 +1312,21 @@
         var duration = 1200;
         var startTime = null;
 
+        el.innerHTML = '<span class="stat-num"></span><span class="stat-plus">+</span>';
+        var numEl = el.querySelector('.stat-num');
+        var plusEl = el.querySelector('.stat-plus');
+
         function step(timestamp) {
           if (!startTime) startTime = timestamp;
           var progress = Math.min((timestamp - startTime) / duration, 1);
           var eased = 1 - Math.pow(1 - progress, 3);
-          el.textContent = Math.floor(eased * target);
-          if (progress < 1) requestAnimationFrame(step);
-          else el.textContent = target + '+';
+          numEl.textContent = Math.floor(eased * target);
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            numEl.textContent = target;
+            setTimeout(function() { plusEl.classList.add('visible'); }, 100);
+          }
         }
         requestAnimationFrame(step);
       }
@@ -1229,6 +1342,59 @@
 
       statEls.forEach(function (el) { observer.observe(el); });
     })();
+  </script>
+
+  <script>
+    (function() {
+      var hdr = document.querySelector('header');
+      window.addEventListener('scroll', function() {
+        hdr.classList.toggle('scrolled', window.scrollY > 10);
+      }, { passive: true });
+      var els = document.querySelectorAll('.reveal');
+      if (!els.length) return;
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(function(el) { obs.observe(el); });
+    })();
+  </script>
+
+  <script>
+    (function() {
+      var toggle = document.querySelector('.nav-toggle');
+      var drawer = document.getElementById('navDrawer');
+      var backdrop = document.getElementById('navBackdrop');
+      function openMenu() {
+        drawer.classList.add('open');
+        backdrop.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+      function closeMenu() {
+        drawer.classList.remove('open');
+        backdrop.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+      toggle.addEventListener('click', openMenu);
+      backdrop.addEventListener('click', closeMenu);
+      drawer.querySelector('.nav-drawer-close').addEventListener('click', closeMenu);
+      drawer.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+    })();
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "American Viewpoint",
+    "url": "https://www.amview.com",
+    "logo": "https://www.amview.com/Logo.png",
+    "description": "Public opinion research firm serving political campaigns and corporate clients since 1985.",
+    "foundingDate": "1985",
+    "telephone": "+17036843325",
+    "email": "info@amview.com"
+  }
   </script>
 
 </body>
