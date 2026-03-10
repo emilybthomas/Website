@@ -194,6 +194,8 @@
       text-transform: uppercase;
     }
     .case-card.expanded::after { display: none; }
+    .case-card:not(:has(.case-detail))::after { display: none; }
+    .case-card:not(:has(.case-detail)) { cursor: default; }
 
     .case-card-header {
       display: flex;
@@ -454,49 +456,25 @@
   <section id="case-studies">
     <div class="container">
       <div class="case-studies-list">
-
-        <div class="case-card reveal reveal-d1">
-          <button class="case-card-close" aria-label="Close">&#x2715;</button>
-          <div class="case-card-header">
-            <span class="case-tag">Political Research</span>
-            <h3 class="case-headline">Statewide Senate Campaign — Midwest</h3>
-          </div>
-          <p class="case-summary">Benchmark and tracking polling that guided resource allocation and message strategy in a competitive open-seat Senate race.</p>
-          <div class="case-detail">
-            <div class="case-section">
-              <p class="case-section-label">Situation</p>
-              <p>[Placeholder — describe the competitive environment, the client's starting position, and the key strategic questions going into the race.]</p>
-            </div>
-            <div class="case-section">
-              <p class="case-section-label">Research Conducted</p>
-              <p>[Placeholder — describe the research methodology: benchmark survey, tracking polls, focus groups, dial testing of ads, etc. Include timing, sample sizes, and geographic scope.]</p>
-            </div>
-            <div class="case-section">
-              <p class="case-section-label">Outcome</p>
-              <p>[Placeholder — describe how the research was used, what decisions it informed, and the election result.]</p>
-            </div>
-          </div>
-        </div>
-
         <div class="case-card reveal reveal-d1">
           <button class="case-card-close" aria-label="Close">&#x2715;</button>
           <div class="case-card-header">
             <span class="case-tag">Corporate Research</span>
-            <h3 class="case-headline">Telecommunications Company — Brand &amp; Messaging Research</h3>
+            <h3 class="case-headline">Fortune 100 Company Brand Enhancement</h3>
           </div>
-          <p class="case-summary">A series of quantitative and qualitative studies to assess brand perception and guide communications strategy for a major telecom provider.</p>
+          <p class="case-summary">A Fortune 100 company had seen erosion in both their brand image and market share after several high-profile incidents that alienated a large number of conservatives. The company was struggling with attempting to be a good corporate citizen without upsetting half of their consumers.</p>
           <div class="case-detail">
             <div class="case-section">
               <p class="case-section-label">Situation</p>
-              <p>[Placeholder — describe the client's business context, the communications challenge or opportunity they were facing, and what they needed to understand.]</p>
+              <p>A Fortune 100 company had seen erosion in both their brand image and market share after several high-profile incidents that alienated a large number of conservatives.  The company was struggling with attempting to be a good corporate citizen without upsetting half of their consumers.</p>
             </div>
             <div class="case-section">
-              <p class="case-section-label">Research Conducted</p>
-              <p>[Placeholder — describe the research methodology: quantitative surveys, focus groups, online ad testing, stakeholder interviews, etc.]</p>
+              <p class="case-section-label">Research and Strategy</p>
+              <p>In the initial survey research, it was apparent that their brand was being defined among conservatives for the recent incidents.  More importantly was that they were being seen as “too political.”  Additional research identified actions that could be done to better the communities they serve, while also not being polarizing.</p>
             </div>
             <div class="case-section">
               <p class="case-section-label">Outcome</p>
-              <p>[Placeholder — describe how the findings were applied and the business impact.]</p>
+              <p>After just over a year, the company saw its brand rating in its home state improve with those on the right from almost a 1 to 1 favorable to unfavorable ratio to nearly a 3 to 1 favorable ratio.  Equally important was that the number of consumers associating the brand with political positions was down sharply as well.</p>
             </div>
           </div>
         </div>
@@ -505,21 +483,21 @@
           <button class="case-card-close" aria-label="Close">&#x2715;</button>
           <div class="case-card-header">
             <span class="case-tag">Crisis Management</span>
-            <h3 class="case-headline">Rapid-Response Reputation Study — National Organization</h3>
+            <h3 class="case-headline">Adapting to Change in Policy (International)</h3>
           </div>
-          <p class="case-summary">Emergency research designed to assess public awareness of allegations and test communications responses under a compressed timeline.</p>
+          <p class="case-summary">An international company faced potential restrictions at both the federal and state levels, which would significantly disrupt their ability to do business in the U.S.</p>
           <div class="case-detail">
             <div class="case-section">
               <p class="case-section-label">Situation</p>
-              <p>[Placeholder — describe the nature of the crisis, the organization involved (generically), and the communications stakes.]</p>
+              <p>An international company faced potential restrictions at both the federal and state levels, which would significantly disrupt their ability to do business in the U.S.</p>
             </div>
             <div class="case-section">
-              <p class="case-section-label">Research Conducted</p>
-              <p>[Placeholder — describe the rapid-turnaround research deployed: national survey, dial testing of news coverage, opinion elite focus groups, etc. Note the timeline.]</p>
+              <p class="case-section-label">Research and Strategy</p>
+              <p>Focus groups, online ad testing, multiple national online surveys and 16 statewide surveys (an ongoing effort since fall 2023) helped guide them in how to explain how vital their operations are to the American economy and American jobs, with an otherwise unavailable international audience.</p>
             </div>
             <div class="case-section">
               <p class="case-section-label">Outcome</p>
-              <p>[Placeholder — describe how the research guided the communications response and what the result was.]</p>
+              <p>Our research continues to help the company successfully avert legislative restrictions and bans on their operations.  Additionally, their brand favorability has improved.</p>
             </div>
           </div>
         </div>
@@ -527,22 +505,22 @@
         <div class="case-card reveal reveal-d1">
           <button class="case-card-close" aria-label="Close">&#x2715;</button>
           <div class="case-card-header">
-            <span class="case-tag">Healthcare &amp; Insurance</span>
-            <h3 class="case-headline">Health Insurance Member Satisfaction Study</h3>
+            <span class="case-tag">Crisis Management</span>
+            <h3 class="case-headline">Adapting to Change in Policy (Domestic)</h3>
           </div>
-          <p class="case-summary">Large-scale member satisfaction research for a major health insurer, producing ratings by plan and actionable recommendations for benefit development.</p>
+          <p class="case-summary">An energy company was facing new environmental regulations that could change much of the way they produced energy.</p>
           <div class="case-detail">
             <div class="case-section">
               <p class="case-section-label">Situation</p>
-              <p>[Placeholder — describe the client's need to understand member satisfaction across their portfolio of plans and what decisions the research would inform.]</p>
+              <p>An energy company was facing new environmental regulations that could change much of the way they produced energy.  </p>
             </div>
             <div class="case-section">
-              <p class="case-section-label">Research Conducted</p>
-              <p>[Placeholder — describe the scope of the study: number of interviews, plan types covered, methodology, and any specialized audience considerations.]</p>
+              <p class="case-section-label">Research and Strategy</p>
+              <p>Focus groups and a survey program helped guide them in how to explain what various environmental tests actually meant, what they were doing about it, and in the hypothetical case of a greater problem, how they would address it immediately.  </p>
             </div>
             <div class="case-section">
               <p class="case-section-label">Outcome</p>
-              <p>[Placeholder — describe how the findings were used, e.g., plan ratings, benefit changes, provider relations improvements.]</p>
+              <p>Our research prepared them to roll out their rapid response well in advance of any problems.  Research indicated our client had the advantage of a strong reputation and brand with customers, and this knowledge allowed the client to leverage its reputation as a trustworthy messenger.</p>
             </div>
           </div>
         </div>
@@ -550,25 +528,108 @@
         <div class="case-card reveal reveal-d1">
           <button class="case-card-close" aria-label="Close">&#x2715;</button>
           <div class="case-card-header">
-            <span class="case-tag">Membership Satisfaction</span>
-            <h3 class="case-headline">Professional Association — National Membership Survey</h3>
+            <span class="case-tag">Healthcare & Brand Enhancement</span>
+            <h3 class="case-headline">Hospital Brand Enhancement through Message Testing</h3>
           </div>
-          <p class="case-summary">Comprehensive membership satisfaction and engagement study for a national professional association, informing strategic planning and member retention efforts.</p>
+          <p class="case-summary">A rural hospital was being viewed as a monopoly in the community, and thus was perceived as offering lower quality of care than larger city hospitals. In reality, the market was not large enough for a second hospital.</p>
           <div class="case-detail">
             <div class="case-section">
               <p class="case-section-label">Situation</p>
-              <p>[Placeholder — describe the association's membership base, the strategic questions they were trying to answer, and any challenges in reaching the target audience.]</p>
+              <p>A rural hospital was being viewed as a monopoly in the community, and thus was perceived as offering lower quality of care than larger city hospitals.  In reality, the market was not large enough for a second hospital.  </p>
             </div>
             <div class="case-section">
-              <p class="case-section-label">Research Conducted</p>
-              <p>[Placeholder — describe the methodology, including how hard-to-reach professional respondents were recruited and what topics the survey covered.]</p>
+              <p class="case-section-label">Research and Strategy</p>
+              <p>Our extensive message testing led to multiple marketing campaigns of varying focus including their quality of care, highlighting industry awards and patient testimonials.  The research also helped the client understand the benefit of emphasizing their role in the community as the largest employer with good-paying jobs and its active role in multiple community organizations and events.  </p>
             </div>
             <div class="case-section">
               <p class="case-section-label">Outcome</p>
-              <p>[Placeholder — describe how the findings were used in strategic planning, member communications, or program development.]</p>
+              <p>Over a five-year period, its brand ratings improved from less than a 1 to 1 positive to negative ratio to a 20+% positive rating.</p>
             </div>
           </div>
         </div>
+
+        <div class="case-card reveal reveal-d1">
+          <button class="case-card-close" aria-label="Close">&#x2715;</button>
+          <div class="case-card-header">
+            <span class="case-tag">Public Affairs</span>
+            <h3 class="case-headline">Defense Contractor Reputation Management</h3>
+          </div>
+          <p class="case-summary">A defense contractor was facing tremendous backlash regarding perceived ties to a well-known political figure.</p>
+          <div class="case-detail">
+            <div class="case-section">
+              <p class="case-section-label">Situation</p>
+              <p>A defense contractor was facing tremendous backlash regarding perceived ties to a well-known political figure.  </p>
+            </div>
+            <div class="case-section">
+              <p class="case-section-label">Research and Strategy</p>
+              <p>Through a series of focus groups and surveys with opinion leaders, American Viewpoint tested messaging that helped drive their messaging to focus on services the subsidiary provided which made deployed troop experiences more like home.  </p>
+            </div>
+            <div class="case-section">
+              <p class="case-section-label">Outcome</p>
+              <p>American Viewpoint provided a data-based argument to disengage from the political back and forth and pivot to a winning message.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-card reveal reveal-d1">
+          <button class="case-card-close" aria-label="Close">&#x2715;</button>
+          <div class="case-card-header">
+            <span class="case-tag">Crisis Management</span>
+            <h3 class="case-headline">Dial Testing for Crisis Management</h3>
+          </div>
+          <p class="case-summary">A company faced a 60 Minutes story that obviously was going to be bad.</p>
+          <div class="case-detail">
+            <div class="case-section">
+              <p class="case-section-label">Situation</p>
+              <p>A company faced a 60 Minutes story that obviously was going to be bad.  </p>
+            </div>
+            <div class="case-section">
+              <p class="case-section-label">Research and Strategy</p>
+              <p>We conducted a dial group with opinion leaders live as it aired to identify what elements were most damaging and held a focus group discussion immediately following it to test specific responses to these charges.  </p>
+            </div>
+            <div class="case-section">
+              <p class="case-section-label">Outcome</p>
+              <p>The client was able to hit the ground running late Sunday night/early Monday morning to respond to and refute the charges made by 60 Minutes.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-card reveal reveal-d1">
+          <button class="case-card-close" aria-label="Close">&#x2715;</button>
+          <div class="case-card-header">
+            <span class="case-tag">Initiative & Referendum Campaigns</span>
+            <h3 class="case-headline">Better Jacksonville Plan</h3>
+          </div>
+          <p class="case-summary">Jacksonville voters were asked to pass a ½ cent sales tax increase to help finance $2.2 billion worth of improvements that would vault the city to the forefront of American cities. The project included transportation projects, a new courthouse, main library, arena, baseball park, sewer lines, environmental clean up, and "smart growth" land preservation purchases. A tax increase had not been approved in 12 years. Ultimately the Better Jacksonville Plan referendum passed 57%-43%.</p>
+        </div>
+
+        <div class="case-card reveal reveal-d1">
+          <button class="case-card-close" aria-label="Close">&#x2715;</button>
+          <div class="case-card-header">
+            <span class="case-tag">Initiative & Referendum Campaigns</span>
+            <h3 class="case-headline">Amendment Three (MO)</h3>
+          </div>
+          <p class="case-summary">With Missouri’s roads being ranked among the most unsafe in the country and voters having rejected previous initiatives to increase transportation funding, transportation advocates turned to American Viewpoint to help guide their efforts. American Viewpoint conducted a benchmark, several brushfire surveys and nightly tracking for the campaign. The Amendment passed with an astounding 79% of the vote on Election Day.</p>
+        </div>
+
+        <div class="case-card reveal reveal-d1">
+          <button class="case-card-close" aria-label="Close">&#x2715;</button>
+          <div class="case-card-header">
+            <span class="case-tag">Initiative & Referendum Campaigns</span>
+            <h3 class="case-headline">Open Space Preservation</h3>
+          </div>
+          <p class="case-summary">American Viewpoint has worked with groups such as the Trust for Public Lands to help pass bond and tax initiatives in order to fund open space as well as conservation projects.</p>
+        </div>
+
+        <div class="case-card reveal reveal-d1">
+          <button class="case-card-close" aria-label="Close">&#x2715;</button>
+          <div class="case-card-header">
+            <span class="case-tag">Initiative & Referendum Campaigns</span>
+            <h3 class="case-headline">Cobb County Special Purpose Local Option Sales Tax (SPLOST)</h3>
+          </div>
+          <p class="case-summary">American Viewpoint was commissioned by local education activists to conduct polling regarding a sales tax to be used for school construction and improvements in the high growth area of Cobb County, Georgia. Although these voters were relatively conservative with anti-tax leanings, American Viewpoint helped guide messaging that showed the importance of this SPLOST as well as the fiscal discipline school have shown with past SPLOST revenues.</p>
+        </div>
+
 
       </div>
     </div>
@@ -609,6 +670,7 @@
         });
 
         card.addEventListener('click', function() {
+          if (!card.querySelector('.case-detail')) return;
           var wasExpanded = card.classList.contains('expanded');
           document.querySelectorAll('.case-card.expanded').forEach(function(c) {
             c.classList.remove('expanded');
