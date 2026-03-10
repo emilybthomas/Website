@@ -675,14 +675,18 @@
     .nav-toggle {
       display: none;
       flex-direction: column;
-      justify-content: space-between;
-      width: 28px;
-      height: 20px;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
       background: none;
       border: none;
       cursor: pointer;
       padding: 0;
       flex-shrink: 0;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
     .nav-toggle span {
       display: block;
@@ -765,17 +769,17 @@
       <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
-      <div class="nav-drawer" id="navDrawer">
-        <button class="nav-drawer-close" aria-label="Close menu">&times;</button>
-        <a href="#about">About</a>
-        <a href="services.html">Services</a>
-        <a href="team.html">Team</a>
-        <a href="clients.html">Clients</a>
-        <a href="#footer">Contact</a>
-      </div>
-      <div class="nav-backdrop" id="navBackdrop"></div>
     </div>
   </header>
+  <div class="nav-drawer" id="navDrawer">
+    <button class="nav-drawer-close" aria-label="Close menu">&times;</button>
+    <a href="#about">About</a>
+    <a href="services.html">Services</a>
+    <a href="team.html">Team</a>
+    <a href="clients.html">Clients</a>
+    <a href="#footer">Contact</a>
+  </div>
+  <div class="nav-backdrop" id="navBackdrop"></div>
 
   <!-- HERO -->
   <section id="hero">
