@@ -13,6 +13,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Case Studies — American Viewpoint",
+    "description": "Research engagements illustrating how American Viewpoint's work has informed campaign strategy, shaped corporate communications, and helped clients win.",
+    "url": "https://www.amview.com/case-studies.html",
+    "publisher": {
+      "@type": "Organization",
+      "name": "American Viewpoint",
+      "url": "https://www.amview.com",
+      "logo": "https://www.amview.com/Logo.png"
+    }
+  }
+  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -152,37 +167,8 @@
       box-shadow: 0 4px 16px rgba(0,0,0,0.10);
     }
 
-    .case-card.expanded {
-      background: var(--bg-muted);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    }
-
-    .case-card-close {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      background: none;
-      border: none;
-      font-size: 1.25rem;
-      line-height: 1;
-      color: var(--text-light);
-      cursor: pointer;
-      padding: 12px 16px;
-      min-width: 44px;
-      min-height: 44px;
-      border-radius: 4px;
-      transition: color 0.15s, background 0.15s;
-      display: none;
-    }
-    .case-card-close:hover,
-    .case-card-close:active {
-      color: var(--text);
-      background: rgba(0,0,0,0.06);
-    }
-    .case-card.expanded .case-card-close { display: block; }
-
     .case-card::after {
-      content: 'Read More >';
+      content: 'View Details >';
       position: absolute;
       bottom: 10px;
       right: 14px;
@@ -193,9 +179,8 @@
       opacity: 0.6;
       text-transform: uppercase;
     }
-    .case-card.expanded::after { display: none; }
-    .case-card:not(:has(.case-detail))::after { display: none; }
-    .case-card:not(:has(.case-detail)) { cursor: default; }
+    .case-card:not(.has-detail)::after { display: none; }
+    .case-card:not(.has-detail) { cursor: default; }
 
     .case-card-header {
       display: flex;
@@ -240,9 +225,6 @@
       animation: fadeIn 0.3s ease;
     }
 
-    .case-card.expanded .case-summary { display: none; }
-
-    .case-card.expanded .case-detail { display: block; }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(6px); }
@@ -268,6 +250,105 @@
       font-size: 0.875rem;
       color: var(--text-light);
       line-height: 1.75;
+    }
+
+    .case-section ul {
+      font-size: 0.875rem;
+      color: var(--text-light);
+      line-height: 1.75;
+      padding-left: 1.5em;
+    }
+
+    /* ── FILTER BAR ── */
+    .case-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .case-filter-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 8px 14px;
+      min-height: 40px;
+      border: 1.5px solid var(--blue);
+      border-radius: 3px;
+      background: transparent;
+      color: var(--blue);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .case-filter-btn:hover,
+    .case-filter-btn.active {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    /* ── DETAIL PANEL (data source only, never visible) ── */
+    .detail-panel { display: none !important; }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.open {
+      display: flex;
+    }
+    .modal-box {
+      background: #fff;
+      border-radius: 6px;
+      border-top: 4px solid var(--blue);
+      max-width: 680px;
+      width: 100%;
+      max-height: 82vh;
+      overflow-y: auto;
+      padding: 40px 44px 36px;
+      position: relative;
+      animation: fadeIn 0.2s ease;
+    }
+    .modal-headline {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--blue-dark);
+      line-height: 1.3;
+      margin-bottom: 20px;
+      padding-right: 40px;
+    }
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      line-height: 1;
+      color: var(--text-light);
+      cursor: pointer;
+      padding: 8px 10px;
+      border-radius: 4px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .modal-close:hover {
+      color: var(--text);
+      background: rgba(0,0,0,0.06);
+    }
+    @media (max-width: 600px) {
+      .modal-box { padding: 28px 20px 24px; }
+      .case-filter-bar { gap: 6px; margin-bottom: 20px; }
+      .case-filter-btn { font-size: 0.72rem; padding: 7px 11px; }
+      #case-studies .container { padding: 0 16px; }
+      .case-studies-list { gap: 12px; }
+      .case-card { padding: 18px 16px; }
     }
 
     /* ── FOOTER ── */
@@ -455,147 +536,150 @@
   <!-- CASE STUDIES -->
   <section id="case-studies">
     <div class="container">
+      <div class="case-filter-bar" role="group" aria-label="Filter case studies by category">
+        <button class="case-filter-btn active" data-filter="all" aria-pressed="true">All</button>
+        <button class="case-filter-btn" data-filter="political" aria-pressed="false">Campaigns</button>
+        <button class="case-filter-btn" data-filter="initiative" aria-pressed="false">Initiative &amp; Referendum</button>
+        <button class="case-filter-btn" data-filter="crisis-management" aria-pressed="false">Crisis Management</button>
+        <button class="case-filter-btn" data-filter="corporate-research" aria-pressed="false">Corporate Research</button>
+        <button class="case-filter-btn" data-filter="healthcare" aria-pressed="false">Healthcare</button>
+        <button class="case-filter-btn" data-filter="public-affairs" aria-pressed="false">Public Affairs</button>
+      </div>
+
       <div class="case-studies-list">
-        <div class="case-card reveal reveal-d1">
-          <button class="case-card-close" aria-label="Close">&#x2715;</button>
+        <div class="case-card has-detail reveal reveal-d1" role="button" tabindex="0" data-category="corporate-research" data-id="fortune100">
           <div class="case-card-header">
             <span class="case-tag">Corporate Research</span>
             <h3 class="case-headline">Fortune 100 Company Brand Enhancement</h3>
           </div>
           <p class="case-summary">A Fortune 100 company had seen erosion in both their brand image and market share after several high-profile incidents that alienated a large number of conservatives. The company was struggling with attempting to be a good corporate citizen without upsetting half of their consumers.</p>
-          <div class="case-detail">
-            <div class="case-section">
-              <p class="case-section-label">Situation</p>
-              <p>A Fortune 100 company had seen erosion in both their brand image and market share after several high-profile incidents that alienated a large number of conservatives.  The company was struggling with attempting to be a good corporate citizen without upsetting half of their consumers.</p>
-            </div>
-            <div class="case-section">
-              <p class="case-section-label">Research and Strategy</p>
-              <p>In the initial survey research, it was apparent that their brand was being defined among conservatives for the recent incidents.  More importantly was that they were being seen as “too political.”  Additional research identified actions that could be done to better the communities they serve, while also not being polarizing.</p>
-            </div>
-            <div class="case-section">
-              <p class="case-section-label">Outcome</p>
-              <p>After just over a year, the company saw its brand rating in its home state improve with those on the right from almost a 1 to 1 favorable to unfavorable ratio to nearly a 3 to 1 favorable ratio.  Equally important was that the number of consumers associating the brand with political positions was down sharply as well.</p>
-            </div>
+        </div>
+        <div class="detail-panel" data-for="fortune100">
+          <div class="case-section">
+            <p class="case-section-label">Situation</p>
+            <p>A Fortune 100 company had seen erosion in both their brand image and market share after several high-profile incidents that alienated a large number of conservatives.  The company was struggling with attempting to be a good corporate citizen without upsetting half of their consumers.</p>
+          </div>
+          <div class="case-section">
+            <p class="case-section-label">Research and Strategy</p>
+            <p>In the initial survey research, it was apparent that their brand was being defined among conservatives for the recent incidents.  More importantly was that they were being seen as “too political."  Additional research identified actions that could be done to better the communities they serve, while also not being polarizing.</p>
+          </div>
+          <div class="case-section">
+            <p class="case-section-label">Outcome</p>
+            <p>After just over a year, the company saw its brand rating in its home state improve with those on the right from almost a 1 to 1 favorable to unfavorable ratio to nearly a 3 to 1 favorable ratio.  Equally important was that the number of consumers associating the brand with political positions was down sharply as well.</p>
           </div>
         </div>
 
-        <div class="case-card reveal reveal-d1">
-          <button class="case-card-close" aria-label="Close">&#x2715;</button>
+        <div class="case-card has-detail reveal reveal-d1" role="button" tabindex="0" data-category="crisis-management" data-id="crisis-intl">
           <div class="case-card-header">
             <span class="case-tag">Crisis Management</span>
             <h3 class="case-headline">Adapting to Change in Policy (International)</h3>
           </div>
           <p class="case-summary">An international company faced potential restrictions at both the federal and state levels, which would significantly disrupt their ability to do business in the U.S.</p>
-          <div class="case-detail">
-            <div class="case-section">
-              <p class="case-section-label">Situation</p>
-              <p>An international company faced potential restrictions at both the federal and state levels, which would significantly disrupt their ability to do business in the U.S.</p>
-            </div>
-            <div class="case-section">
-              <p class="case-section-label">Research and Strategy</p>
-              <p>Focus groups, online ad testing, multiple national online surveys and 16 statewide surveys (an ongoing effort since fall 2023) helped guide them in how to explain how vital their operations are to the American economy and American jobs, with an otherwise unavailable international audience.</p>
-            </div>
-            <div class="case-section">
-              <p class="case-section-label">Outcome</p>
-              <p>Our research continues to help the company successfully avert legislative restrictions and bans on their operations.  Additionally, their brand favorability has improved.</p>
-            </div>
+        </div>
+        <div class="detail-panel" data-for="crisis-intl">
+          <div class="case-section">
+            <p class="case-section-label">Situation</p>
+            <p>An international company faced potential restrictions at both the federal and state levels, which would significantly disrupt their ability to do business in the U.S.</p>
+          </div>
+          <div class="case-section">
+            <p class="case-section-label">Research and Strategy</p>
+            <p>Focus groups, online ad testing, multiple national online surveys and 16 statewide surveys (an ongoing effort since fall 2023) helped guide them in how to explain how vital their operations are to the American economy and American jobs, with an otherwise unavailable international audience.</p>
+          </div>
+          <div class="case-section">
+            <p class="case-section-label">Outcome</p>
+            <p>Our research continues to help the company successfully avert legislative restrictions and bans on their operations.  Additionally, their brand favorability has improved.</p>
           </div>
         </div>
 
-        <div class="case-card reveal reveal-d1">
-          <button class="case-card-close" aria-label="Close">&#x2715;</button>
+        <div class="case-card has-detail reveal reveal-d1" role="button" tabindex="0" data-category="crisis-management" data-id="crisis-domestic">
           <div class="case-card-header">
             <span class="case-tag">Crisis Management</span>
             <h3 class="case-headline">Adapting to Change in Policy (Domestic)</h3>
           </div>
           <p class="case-summary">An energy company was facing new environmental regulations that could change much of the way they produced energy.</p>
-          <div class="case-detail">
-            <div class="case-section">
-              <p class="case-section-label">Situation</p>
-              <p>An energy company was facing new environmental regulations that could change much of the way they produced energy.  </p>
-            </div>
-            <div class="case-section">
-              <p class="case-section-label">Research and Strategy</p>
-              <p>Focus groups and a survey program helped guide them in how to explain what various environmental tests actually meant, what they were doing about it, and in the hypothetical case of a greater problem, how they would address it immediately.  </p>
-            </div>
-            <div class="case-section">
-              <p class="case-section-label">Outcome</p>
-              <p>Our research prepared them to roll out their rapid response well in advance of any problems.  Research indicated our client had the advantage of a strong reputation and brand with customers, and this knowledge allowed the client to leverage its reputation as a trustworthy messenger.</p>
-            </div>
+        </div>
+        <div class="detail-panel" data-for="crisis-domestic">
+          <div class="case-section">
+            <p class="case-section-label">Situation</p>
+            <p>An energy company was facing new environmental regulations that could change much of the way they produced energy.  </p>
+          </div>
+          <div class="case-section">
+            <p class="case-section-label">Research and Strategy</p>
+            <p>Focus groups and a survey program helped guide them in how to explain what various environmental tests actually meant, what they were doing about it, and in the hypothetical case of a greater problem, how they would address it immediately.  </p>
+          </div>
+          <div class="case-section">
+            <p class="case-section-label">Outcome</p>
+            <p>Our research prepared them to roll out their rapid response well in advance of any problems.  Research indicated our client had the advantage of a strong reputation and brand with customers, and this knowledge allowed the client to leverage its reputation as a trustworthy messenger.</p>
           </div>
         </div>
 
-        <div class="case-card reveal reveal-d1">
-          <button class="case-card-close" aria-label="Close">&#x2715;</button>
+        <div class="case-card has-detail reveal reveal-d1" role="button" tabindex="0" data-category="healthcare" data-id="hospital-brand">
           <div class="case-card-header">
             <span class="case-tag">Healthcare & Brand Enhancement</span>
             <h3 class="case-headline">Hospital Brand Enhancement through Message Testing</h3>
           </div>
           <p class="case-summary">A rural hospital was being viewed as a monopoly in the community, and thus was perceived as offering lower quality of care than larger city hospitals. In reality, the market was not large enough for a second hospital.</p>
-          <div class="case-detail">
-            <div class="case-section">
-              <p class="case-section-label">Situation</p>
-              <p>A rural hospital was being viewed as a monopoly in the community, and thus was perceived as offering lower quality of care than larger city hospitals.  In reality, the market was not large enough for a second hospital.  </p>
-            </div>
-            <div class="case-section">
-              <p class="case-section-label">Research and Strategy</p>
-              <p>Our extensive message testing led to multiple marketing campaigns of varying focus including their quality of care, highlighting industry awards and patient testimonials.  The research also helped the client understand the benefit of emphasizing their role in the community as the largest employer with good-paying jobs and its active role in multiple community organizations and events.  </p>
-            </div>
-            <div class="case-section">
-              <p class="case-section-label">Outcome</p>
-              <p>Over a five-year period, its brand ratings improved from less than a 1 to 1 positive to negative ratio to a 20+% positive rating.</p>
-            </div>
+        </div>
+        <div class="detail-panel" data-for="hospital-brand">
+          <div class="case-section">
+            <p class="case-section-label">Situation</p>
+            <p>A rural hospital was being viewed as a monopoly in the community, and thus was perceived as offering lower quality of care than larger city hospitals.  In reality, the market was not large enough for a second hospital.  </p>
+          </div>
+          <div class="case-section">
+            <p class="case-section-label">Research and Strategy</p>
+            <p>Our extensive message testing led to multiple marketing campaigns of varying focus including their quality of care, highlighting industry awards and patient testimonials.  The research also helped the client understand the benefit of emphasizing their role in the community as the largest employer with good-paying jobs and its active role in multiple community organizations and events.  </p>
+          </div>
+          <div class="case-section">
+            <p class="case-section-label">Outcome</p>
+            <p>Over a five-year period, its brand ratings improved from less than a 1 to 1 positive to negative ratio to a 20+% positive rating.</p>
           </div>
         </div>
 
-        <div class="case-card reveal reveal-d1">
-          <button class="case-card-close" aria-label="Close">&#x2715;</button>
+        <div class="case-card has-detail reveal reveal-d1" role="button" tabindex="0" data-category="public-affairs" data-id="defense-contractor">
           <div class="case-card-header">
             <span class="case-tag">Public Affairs</span>
             <h3 class="case-headline">Defense Contractor Reputation Management</h3>
           </div>
           <p class="case-summary">A defense contractor was facing tremendous backlash regarding perceived ties to a well-known political figure.</p>
-          <div class="case-detail">
-            <div class="case-section">
-              <p class="case-section-label">Situation</p>
-              <p>A defense contractor was facing tremendous backlash regarding perceived ties to a well-known political figure.  </p>
-            </div>
-            <div class="case-section">
-              <p class="case-section-label">Research and Strategy</p>
-              <p>Through a series of focus groups and surveys with opinion leaders, American Viewpoint tested messaging that helped drive their messaging to focus on services the subsidiary provided which made deployed troop experiences more like home.  </p>
-            </div>
-            <div class="case-section">
-              <p class="case-section-label">Outcome</p>
-              <p>American Viewpoint provided a data-based argument to disengage from the political back and forth and pivot to a winning message.</p>
-            </div>
+        </div>
+        <div class="detail-panel" data-for="defense-contractor">
+          <div class="case-section">
+            <p class="case-section-label">Situation</p>
+            <p>A defense contractor was facing tremendous backlash regarding perceived ties to a well-known political figure.  </p>
+          </div>
+          <div class="case-section">
+            <p class="case-section-label">Research and Strategy</p>
+            <p>Through a series of focus groups and surveys with opinion leaders, American Viewpoint tested messaging that helped drive their messaging to focus on services the subsidiary provided which made deployed troop experiences more like home.  </p>
+          </div>
+          <div class="case-section">
+            <p class="case-section-label">Outcome</p>
+            <p>American Viewpoint provided a data-based argument to disengage from the political back and forth and pivot to a winning message.</p>
           </div>
         </div>
 
-        <div class="case-card reveal reveal-d1">
-          <button class="case-card-close" aria-label="Close">&#x2715;</button>
+        <div class="case-card has-detail reveal reveal-d1" role="button" tabindex="0" data-category="crisis-management" data-id="60-minutes">
           <div class="case-card-header">
             <span class="case-tag">Crisis Management</span>
             <h3 class="case-headline">Dial Testing for Crisis Management</h3>
           </div>
           <p class="case-summary">A company faced a 60 Minutes story that obviously was going to be bad.</p>
-          <div class="case-detail">
-            <div class="case-section">
-              <p class="case-section-label">Situation</p>
-              <p>A company faced a 60 Minutes story that obviously was going to be bad.  </p>
-            </div>
-            <div class="case-section">
-              <p class="case-section-label">Research and Strategy</p>
-              <p>We conducted a dial group with opinion leaders live as it aired to identify what elements were most damaging and held a focus group discussion immediately following it to test specific responses to these charges.  </p>
-            </div>
-            <div class="case-section">
-              <p class="case-section-label">Outcome</p>
-              <p>The client was able to hit the ground running late Sunday night/early Monday morning to respond to and refute the charges made by 60 Minutes.</p>
-            </div>
+        </div>
+        <div class="detail-panel" data-for="60-minutes">
+          <div class="case-section">
+            <p class="case-section-label">Situation</p>
+            <p>A company faced a 60 Minutes story that obviously was going to be bad.  </p>
+          </div>
+          <div class="case-section">
+            <p class="case-section-label">Research and Strategy</p>
+            <p>We conducted a dial group with opinion leaders live as it aired to identify what elements were most damaging and held a focus group discussion immediately following it to test specific responses to these charges.  </p>
+          </div>
+          <div class="case-section">
+            <p class="case-section-label">Outcome</p>
+            <p>The client was able to hit the ground running late Sunday night/early Monday morning to respond to and refute the charges made by 60 Minutes.</p>
           </div>
         </div>
 
-        <div class="case-card reveal reveal-d1">
-          <button class="case-card-close" aria-label="Close">&#x2715;</button>
+        <div class="case-card reveal reveal-d1" data-category="initiative" data-id="jacksonville">
           <div class="case-card-header">
             <span class="case-tag">Initiative & Referendum Campaigns</span>
             <h3 class="case-headline">Better Jacksonville Plan</h3>
@@ -603,17 +687,15 @@
           <p class="case-summary">Jacksonville voters were asked to pass a ½ cent sales tax increase to help finance $2.2 billion worth of improvements that would vault the city to the forefront of American cities. The project included transportation projects, a new courthouse, main library, arena, baseball park, sewer lines, environmental clean up, and "smart growth" land preservation purchases. A tax increase had not been approved in 12 years. Ultimately the Better Jacksonville Plan referendum passed 57%-43%.</p>
         </div>
 
-        <div class="case-card reveal reveal-d1">
-          <button class="case-card-close" aria-label="Close">&#x2715;</button>
+        <div class="case-card reveal reveal-d1" data-category="initiative" data-id="amendment-three">
           <div class="case-card-header">
             <span class="case-tag">Initiative & Referendum Campaigns</span>
             <h3 class="case-headline">Amendment Three (MO)</h3>
           </div>
-          <p class="case-summary">With Missouri’s roads being ranked among the most unsafe in the country and voters having rejected previous initiatives to increase transportation funding, transportation advocates turned to American Viewpoint to help guide their efforts. American Viewpoint conducted a benchmark, several brushfire surveys and nightly tracking for the campaign. The Amendment passed with an astounding 79% of the vote on Election Day.</p>
+          <p class="case-summary">With Missouri's roads being ranked among the most unsafe in the country and voters having rejected previous initiatives to increase transportation funding, transportation advocates turned to American Viewpoint to help guide their efforts. American Viewpoint conducted a benchmark, several brushfire surveys and nightly tracking for the campaign. The Amendment passed with an astounding 79% of the vote on Election Day.</p>
         </div>
 
-        <div class="case-card reveal reveal-d1">
-          <button class="case-card-close" aria-label="Close">&#x2715;</button>
+        <div class="case-card reveal reveal-d1" data-category="initiative" data-id="open-space">
           <div class="case-card-header">
             <span class="case-tag">Initiative & Referendum Campaigns</span>
             <h3 class="case-headline">Open Space Preservation</h3>
@@ -621,8 +703,7 @@
           <p class="case-summary">American Viewpoint has worked with groups such as the Trust for Public Lands to help pass bond and tax initiatives in order to fund open space as well as conservation projects.</p>
         </div>
 
-        <div class="case-card reveal reveal-d1">
-          <button class="case-card-close" aria-label="Close">&#x2715;</button>
+        <div class="case-card reveal reveal-d1" data-category="initiative" data-id="cobb-splost">
           <div class="case-card-header">
             <span class="case-tag">Initiative & Referendum Campaigns</span>
             <h3 class="case-headline">Cobb County Special Purpose Local Option Sales Tax (SPLOST)</h3>
@@ -630,6 +711,186 @@
           <p class="case-summary">American Viewpoint was commissioned by local education activists to conduct polling regarding a sales tax to be used for school construction and improvements in the high growth area of Cobb County, Georgia. Although these voters were relatively conservative with anti-tax leanings, American Viewpoint helped guide messaging that showed the importance of this SPLOST as well as the fiscal discipline school have shown with past SPLOST revenues.</p>
         </div>
 
+        <div class="case-card has-detail reveal reveal-d1" role="button" tabindex="0" data-category="political" data-id="roy-blunt">
+          <div class="case-card-header">
+            <span class="case-tag">Campaigns</span>
+            <h3 class="case-headline">Roy Blunt for Senate (MO, 2010)</h3>
+          </div>
+          <p class="case-summary">American Viewpoint guided Roy Blunt's 2010 Missouri Senate campaign against Robin Carnahan, tracking shifting voter sentiment through extensive polling as Blunt overcame early attack ads and a challenging political environment. Blunt won with 54% of the vote by successfully positioning himself as an agent of change and tying Carnahan to an unpopular Obama agenda.</p>
+        </div>
+        <div class="detail-panel" data-for="roy-blunt">
+          <div class="case-section">
+              <p>Senator Kit Bond announced his retirement in January 2009.  Former Minority Whip Roy Blunt announced his decision to seek the seat in February 2009.  Secretary of State Robin Carnahan also announced at this time and the race between two renowned Missouri political dynasties was fully engaged. </p>
+              <br />
+              <p>In May 2009, American Viewpoint polling showed President Obama with a job approval rating of 58%-39% among Missouri likely voters - in a state he lost by 4000 votes.  His approval rating would only decline during the course of the campaign.  Obama's job approval was 42%-54% in the last week of tracking. </p>
+              <br />
+              <p>With the Republican Party clearly in the minority in both the Senate and the House of Representatives and the newly emergent Democratic Party at its ascendancy, fundraising for GOP candidates got off to a slow start in the first half of 2009.  Allies of Robin Carnahan took this opportunity to go on the air early with an Independent Expenditure campaign that directly targeted Roy Blunt personally, with the goal of driving up his unfavorable ratings very early on before the campaign would logically consider going on air. </p>
+              <br />
+              <p>The first buy from League of Conservation Voters (LCV) hit in the Springfield Media Market, the heart of the Blunt base, then moved to Kansas City and St. Louis.  Ultimately LCV would spend hundreds of thousands of dollars in linking Blunt to “Big Oil."  Both the Carnahan campaign and LCV had a common denominator throughout all of their advertising efforts - to go after Blunt personally as a tool of special interests and a Washington insider to drive up his unfavorable ratings to unsustainable levels.  The Blunt campaign showed remarkable discipline in not engaging in an early response that would have depleted money necessary at the end of the campaign. </p>
+              <br />
+              <p>In May 2009, after the first LCV attack was aired, Roy Blunt's favorable:unfavorable ratio was 41:31 in comparison to 53:27 for Robin Carnahan.  Carnahan held a ballot advantage of 41%-49%, but was unable to surpass the 50% barrier.  Blunt also trailed with the critical Independent voter bloc, down 34%-43% on the ballot.  Most disturbing, his favorable:unfavorable ratio with Independents was 33:34 in comparison to Carnahan's strong 57:21 favorable:unfavorable ratio.  The same trend was apparent with women 60+ and white suburban women, where Blunt trailed on the ballot test with Carnahan holding a vastly superior favorable:unfavorable ratio. </p>
+              <br />
+              <p>Fast forward to February 2010, during the height of the debate on Obama's health care plan, with Robin Carnahan tepidly supporting the bill.  Blunt had worked aggressively in visiting the entire state and all 114 counties, building a strong grass roots organization, cranking out new media hits on Carnahan, asking voters where Carnahan was and what her position was on the key issues of the day. </p>
+              <br />
+              <p>Along with LCV, additional Carnahan allies spent significant resources attacking Roy Blunt, with total outside money topping $1 million by early 2010.  Carnahan's outside allies understood early on that the ground was shifting against the Democratic Party and its candidates and was making every attempt to drive up Blunt's unfavorable ratings with Independents.  However, American Viewpoint polling in February 2010 showed Blunt had forged into a narrow ballot advantage of 47%-41%.  More importantly, his favorable:unfavorable ratio, while weak was still positive at 42:39 with Carnahan's rating declining to 46:33. </p>
+              <br />
+              <p>Blunt had reversed a 39%-54% ballot deficit with women 60+ and now led 46%-43%.  The same trend was apparent with Independent women, with Blunt trailing 29%-39% in May 2009, but leading 44%-40% inFebruary 2010.  </p>
+              <br />
+              <p>From the beginning, Blunt strategists recognized that for the campaign to be successful, Blunt had to be positioned as the agent of change and strive to tie Carnahan to the party in power in Washington.  A key metric to measure the achievement of this goal was the vote share Blunt held with wrong track voters.  In May 2010, Blunt was leading with wrong track voters 67%-24%.  Clearly, Carnahan's strategy was not working as Blunt was winning handily with those voters angered by the direction President Obama was taking the country. </p>
+              <br />
+              <p>July 8th, 2010, the game changer occurred.  President Obama and his entourage flew to Kansas City for a fundraiser for Robin Carnahan.  The President clearly pleaded with his supporters to give him the support he needed in Washington - another vote by Robin Carnahan to support his policies.  Thus, Rubber Stamp Robin was born.  Obama's job approval rating was 41%-55% in the August 2010 survey. </p>
+              <br />
+              <p>The last 3 day roll of tracking (Oct. 26-28) had Blunt leading with wrong track voters (70%-16%) and was pulling 80% of Obama disapprovers (80%-7%).  At the same time, Blunt was highly competitive with those voters stating that jobs and the economy was their most important issue determinant (down only 36%-53%).  Blunt was competitive on both the compassion dimension (leading slightly 42%-41%) and on the change dimension (42%-37%). </p>
+              <br />
+              <p>The Carnahan attacks were relentlessly negative down the final stretch while the Blunt campaign talked about jobs, presented a jobs plan, discussed the consequences of Obama's health care bill and its ramifications for seniors on Medicare, and presented a clear contrast in vision on the size and scope of government. </p>
+              <br />
+              <p>The fact that the Carnahan family benefited personally from the Obama stimulus package (her brother, Tom, owning a wind farm and getting federal stimulus funds) was helpful in demonstrating a degree of hypocrisy on her part and highlighting the Carnahan's as the ultimate political insiders sharing in federal largess. </p>
+              <br />
+              <p>The campaign ran up huge margins with men, leading among men by 19% in the last 3 day roll with the contest being tied with women.  The Blunt campaign's success in targeting senior women, suburban women and Independent women helped to drive the Blunt margin to an overall 54% vote share on Election Day.</p>
+          </div>
+        </div>
+
+        <div class="case-card has-detail reveal reveal-d1" role="button" tabindex="0" data-category="political" data-id="vicky-hartzler">
+          <div class="case-card-header">
+            <span class="case-tag">Campaigns</span>
+            <h3 class="case-headline">Vicky Hartzler (MO CD 4, 2010)</h3>
+          </div>
+          <p class="case-summary">It's never easy to defeat an incumbent, let alone a 34-year committee chair of the powerful Armed Services Committee.  </p>
+        </div>
+        <div class="detail-panel" data-for="vicky-hartzler">
+          <div class="case-section">
+              <p>With two large military bases in the district, Ike Skelton had made a career out of securing funding for these bases and the military in general.  In a district where about 1/3 of voters are from military or veteran households, Skelton had built up a great deal of good will with a large portion of the electorate and it was clear from the beginning that this would be his central issue in the 2010 campaign. </p>
+              <br />
+              <p>To face Ike Skelton in the general election, Vicky Hartzler first had to defeat a well known and well respected State Senator in the primary.  Missouri's primary isn't until the first Tuesday in August, so even after a convincing win in the primary, Hartzler's resources were depleted and it looked to be extremely difficult to knock off Skelton even in a favorable environment.  The difficulty was compounded by the fact that the district included three major media markets (Kansas City, Springfield and Columbia/Jefferson City) where ads had to run in order to win. </p>
+              <br />
+              <p>The initial benchmark survey indicated several imperatives: 1. This race would be won by tying Ike Skelton to wrong track sentiment, specifically in terms of a lack of job growth and his support of outrageous spending; and 2. Tone would be extremely important.  Ike Skelton had some of the strongest favorable ratings of any Member of Congress in the country and Vicky would need to get the vote of a large number of voters on Election Day who would still have a favorable impression of Skelton.</p>
+              <br />
+              <p>From the moment Hartzler was the nominee, the Skelton campaign attacked her on an obscure vote from her time in the legislature regarding the National Guard, framing it as if she did not support veterans.  This was their primary message for nearly four months.   </p>
+              <br />
+              <p>Conversely, the Hartzler campaign made their central focus on fixing what's wrong in Congress and that “there's a better way ahead."  In the face of relentless attacks on the National Guard vote, the campaign maintained its focus on tying Skelton to the wrong track and showing how he has changed in his 34 years.  Brushfire surveys throughout the campaign confirmed that while the attack was hurting Hartzler's favorable ratings, she was still closing in on Skelton.  The only response to the military funding attacks were on targeted cable and radio, along with earned media.</p>
+              <br />
+              <p>Once the race reached the margin of error, the tipping point of this campaign was likely an ad that showed Ike Skelton on the floor of the House blurting an obscenity and tying this to him changing over the past 34 years, now supporting the Obama-Pelosi job-killing and debt-raising agenda.  The closing ad consisted of former Skelton supporters telling how they are now supporting Vicky, with one senior man stating it best:  “I didn't leave Ike Skelton, Ike Skelton left me."</p>
+              <br />
+              <p>Hartzler ultimately won this election 50.4% to 45.1% and this race is a testament to the importance of testing a messaging plan through survey research and then staying on message and controlling the issue agenda.</p>
+          </div>
+        </div>
+
+        <div class="case-card has-detail reveal reveal-d1" role="button" tabindex="0" data-category="political" data-id="austin-scott">
+          <div class="case-card-header">
+            <span class="case-tag">Campaigns</span>
+            <h3 class="case-headline">Austin Scott (GA CD 8, 2010)</h3>
+          </div>
+          <p class="case-summary">American Viewpoint's polling helped Austin Scott unseat entrenched incumbent Jim Marshall in Georgia's 8th Congressional District in 2010 by identifying jobs and the economy — not immigration — as the dominant voter concerns and crafting a strategy that tied Marshall to the unpopular Pelosi-Obama agenda. Scott won 53% to 47%.</p>
+        </div>
+        <div class="detail-panel" data-for="austin-scott">
+          <div class="case-section">
+              <p>Since first being elected in 2002, Congressman Jim Marshall was one of the top Democratic targets in the country and was the primary target of a mid-Census redistricting effort by the Republican legislature in 2005.  However, in both 2006 and 2008 he was able to defeat very well-funded Republican opponents, including a former Member of Congress. </p>
+              <br />
+              <p>Marshall is far from a typical Democrat and for the most part, ideologically falls in line with the voters in the district as he is pro-life and pro-gun.  The district also has a large military presence, a constituency Marshall frequently targeted with both his veteran status and his position on the Armed Services Committee. </p>
+              <br />
+              <p>However, 2010 was not 2008 or 2006 and Republicans nominated a very strong candidate in Austin Scott, a former member of the state house.  Early polling indicated that Marshall was very well liked by voters and while Congress' approval ratings were terrible, his were strong.  Similarly, Nancy Pelosi's unfavorables were sky high as was wrong track sentiment.  Based on this data, the primary focus of the campaign after defining Austin was to tie Marshall to Pelosi and the Democratic Congress' failed policies. </p>
+              <br />
+              <p>To Marshall's credit, he understood early on that this would be a difficult election cycle for Democrats and rather than run a traditional accomplishments-focused ad to start the campaign, his first ad was an attack ad on Austin Scott and a vote Austin made in the legislature regarding immigration.  While out of context, when framed in a 30 second ad this would have been a powerful attack in most other election cycles.  However, in the benchmark survey only 5% of voters cited illegal immigration as the most important issue in deciding their vote, compared to 42% citing jobs and the economy and 16% citing spending and the national debt.</p>
+              <br />
+              <p>Based on this data, the decision was made to briefly respond to the immigration attack, but to focus the most attention on Marshall's inability to bring jobs back to Georgia and his support of the Obama-Pelosi stimulus package.  This immediately put the incumbent on the defensive and he was never again able to get his footing.  In fact, in early October when he was already trailing the challenger, Marshall became one of the first Democratic Members of Congress to renounce Nancy Pelosi and did an ad saying he would not vote for her for Speaker again.  Unfortunately for him, he had already cast that vote and more importantly, voted for the Pelosi agenda.</p>
+              <br />
+              <p>While the issues were clearly in Austin Scott's favor, he wasn't very well known by voters.  As a result, rather than doing traditional attack ads with a voiceover, most of the campaign's ads had Austin talking directly to voters about the differences between himself and Jim Marshall.  This allowed the campaign to simultaneously build Austin's favorable ratings while driving up Marshall's unfavorable ratings. </p>
+              <br />
+              <p>After a very well orchestrated campaign, Austin Scott defeated Jim Marshall by a relatively comfortable margin of 53% to 47%.</p>
+          </div>
+        </div>
+
+        <div class="case-card has-detail reveal reveal-d1" role="button" tabindex="0" data-category="political" data-id="matt-blunt">
+          <div class="case-card-header">
+            <span class="case-tag">Campaigns</span>
+            <h3 class="case-headline">Matt Blunt for Governor (MO, 2004)</h3>
+          </div>
+          <p class="case-summary">American Viewpoint provided comprehensive research and tracking for Matt Blunt's 2004 Missouri gubernatorial campaign, helping the campaign pivot its strategy when the primary opponent unexpectedly changed from an unpopular incumbent to a formidable challenger in Claire McCaskill. Blunt won by over 81,000 votes, becoming the first Republican elected Governor of Missouri since 1988.</p>
+        </div>
+        <div class="detail-panel" data-for="matt-blunt">
+          <div class="case-section">
+              <p>When Matt Blunt first decided to run for Governor in early 2003, he was planning on running against Bob Holden, a very unpopular incumbent whose job approval was under 30%.</p>
+              <br />
+              <p>Early in the process American Viewpoint developed a vote model for the campaign that included vote goals for each region of the state. This model was used to track where the campaign was under-performing throughout tracking and helped decisions on resource allocations.</p>
+              <br />
+              <p>American Viewpoint worked closely with the campaign to put together a benchmark survey that tested Matt's background, issue positions and experiences, as well as past positions taken by the unpopular incumbent Governor. With this the campaign was armed with the information needed to layout their message strategy for the next year and a half.</p>
+              <br />
+              <p>However, in the summer of 2004 it became apparent that Governor Holden was facing a very difficult primary challenge from the Missouri State Auditor, Claire McCaskill. Ultimately McCaskill upset Governor Holden in the primary, greatly affecting the Blunt campaign plan.</p>
+              <br />
+              <p>The plan was originally built on a thematic of change - and specifically a change from the unpopular incumbent. However, Auditor McCaskill's primary victory brought about that change prematurely forcing the Blunt campaign to refocus its efforts.</p>
+              <br />
+              <p>The day after the primary the Missouri press focused on McCaskill as a giant killer and the new front-runner in the race for Governor. The premise of Matt Blunt's vision for Missouri did not change, but the comparison of his background to McCaskill's did. Through a post-primary benchmark and dial testing of potential advertising, several things became apparent:</p>
+              <br />
+              <ul>
+                <li>Matt Blunt's background as a naval officer was a strong selling point and demonstrated the leadership necessary to be Governor.</li>
+                <li>Claire McCaskill was very vulnerable on issues dealing with past personal tax issues as well as dealing with her husband's nursing homes.</li>
+                <li>While Matt Blunt's values matched closely with out-state Missourians, Claire McCaskill's did not.</li>
+                <li>The three key swing groups were women, suburban voters and seniors. American Viewpoint conducted extensive sub-group analyses of the voting blocs to identify key issues that would move them to the Blunt side.</li>
+              </ul>
+              <br />
+              <p>Nightly tracking was conducted from late September through the last weekend of the campaign and helped drive advertising and mail traffic as well as the campaign's paid media messages. American Viewpoint was an instrumental member of the Blunt strategy team in all aspects of the campaign, from mail and television to get out the vote calls two days before the election.</p>
+              <br />
+              <p>Ultimately Matt Blunt was elected Governor in the battleground state of Missouri by over 81,000 votes, the first time a Republican was elected Governor in Missouri since John Ashcroft in 1988.</p>
+          </div>
+        </div>
+
+        <div class="case-card has-detail reveal reveal-d1" role="button" tabindex="0" data-category="political" data-id="johnny-isakson">
+          <div class="case-card-header">
+            <span class="case-tag">Campaigns</span>
+            <h3 class="case-headline">Johnny Isakson for Senate (GA, 2004)</h3>
+          </div>
+          <p class="case-summary">American Viewpoint guided Johnny Isakson's 2004 Georgia Senate primary campaign using polling, focus groups, and dial testing to develop a targeted advertising strategy against two strong opponents. Isakson won outright with 53.3% — avoiding a runoff — and went on to win the general election with 57.9%, the largest vote total ever received by a non-Presidential GOP candidate in Georgia.</p>
+        </div>
+        <div class="detail-panel" data-for="johnny-isakson">
+          <div class="case-section">
+              <p>The late Johnny Isakson was an American Viewpoint client since he first ran for Governor of Georgia in 1990. Two other Republican candidates ran against Isakson; a long time Congressman and member of the powerful Ways and Means Committee (Mac Collins), and a multi-millionaire former Fortune 500 CEO (Herman Cain).</p>
+              <br />
+              <p>Georgia state law requires that a candidate receive 50% of the vote on Election Day, or a runoff election is held. While Isakson was the early favorite, with three strong GOP candidates in the race it would be very difficult to avoid a primary, with his two primary opponents only needing to garner 25% of the vote respectively. However, the campaign's goal from Day 1 was to avoid a runoff.</p>
+              <br />
+              <p>Early focus groups were conducted to identify strengths and weaknesses of all three candidates and a benchmark survey was conducted to measure which of Congressman Isakson's accomplishments were strongest in relaying his conservative bona-fides to GOP primary voters.</p>
+              <br />
+              <p>American Viewpoint worked closely with the mail consultant in monitoring the success of the mail program throughout the campaign by including mail tracks as part of the regional breaks in the data rather than looking just at media markets and other more traditional geographic areas.</p>
+              <br />
+              <p>Before the Isakson advertising began, American Viewpoint conducted dial tests of potential advertisements to identify the strongest spots to run as well as to give the media consultant guidance on fine tuning the ads. Respondents in these groups emphasized the importance of experience, leadership and values, all of which became central themes in the advertising.</p>
+              <br />
+              <p>American Viewpoint's research identified that Isakson was very well defined in the expensive Atlanta media market, but was lesser known in the smaller, more rural markets. This information led to a decision to go on air earlier in the less expensive South Georgia media markets, where Isakson was able to be the only one on air for more than a month, locking in much of the vote before either of the opponents even began their ad campaigns.</p>
+              <br />
+              <p>Johnny Isakson began the race with a substantial lead and continued to hold a lead throughout tracking even while being attacked on television and radio by both opponents and an outside group simultaneously. The tracking data signaled that Isakson's lead was strong enough that he did not have to respond to these attack ads through paid media, nor did he have to air contrast ads against either opponent.</p>
+              <br />
+              <p>Isakson won the primary with 53.3% of the vote, avoiding a runoff and saving resources for the general election. Isakson went on to win the general election with 57.9% of the vote, the largest vote total any non-Presidential GOP candidate has ever received in Georgia.</p>
+          </div>
+        </div>
+
+        <div class="case-card has-detail reveal reveal-d1" role="button" tabindex="0" data-category="political" data-id="jim-talent">
+          <div class="case-card-header">
+            <span class="case-tag">Campaigns</span>
+            <h3 class="case-headline">Jim Talent for Senate (MO, 2002)</h3>
+          </div>
+          <p class="case-summary">"American Viewpoint's ability to go beyond the numbers helped my campaign build coalitions not only with core Republican voters, but with swing voters essential to winning an election in a battleground state like Missouri." (Senator Jim Talent, R-MO)</p>
+        </div>
+        <div class="detail-panel" data-for="jim-talent">
+          <div class="case-section">
+              <p>After difficult close losses for offices on Missouri's statewide ticket in 2000, the 2002 Missouri US Senate race was the quintessential "battleground" race. Following the death of Mel Carnahan, Jean Carnahan was appointed to the Senate. In 2002, an election would be held to decide who would serve the remaining four years of the term.</p>
+              <br />
+              <p>Jim Talent had lost an extremely close race for Governor in 2000, losing by just over 21,000 votes. Talent decided early in 2001 to run for Senate and hired American Viewpoint to serve as pollsters and senior strategists to the campaign. What followed was anything but a "typical" Republican campaign.</p>
+              <br />
+              <p>Early polling in October 2001 showed the race to be extremely polarized by party affiliation, with only about 10% of the electorate undecided. With such a small pool of available voters over a year out from the election, messaging focusing on these swing groups would be essential.</p>
+              <br />
+              <p>By utilizing early focus groups to examine potential campaign themes and by conducting dial tests of mock-up advertising during the development stages, the Talent team was able to specifically tailor advertising to the key swing groups of moderates, women and seniors. In these early focus groups, it was apparent that the "sympathy factor" would still impact the votes of many of these voters, but that there was also an underlying resentment among some voters with the way Carnahan got into office.</p>
+              <br />
+              <p>In early 2002, American Viewpoint conducted an extensive benchmark survey that examined key accomplishments of Jim Talent, opposition research on Jean Carnahan and the potential damage of attacks on Talent. The conclusions from this benchmark helped the campaign decide to embark on a two-pronged message campaign, one for suburban St. Louis and Kansas City, and one for out-state Missouri. For example, while Carnahan's vote against the confirmation of John Ashcroft for Attorney General was a strong vote motivator in the Springfield media market, data showed this issue cross-pressured support with suburban swing voters.</p>
+              <br />
+              <p>Throughout the campaign, monthly brushfires were conducted to track the progress. With these brushfires the Talent campaign was armed with current data to identify any potential problems developing with key voting blocs. In these brushfires, we were also able to test paired statements that measured voters' perceptions of both Talent's and Carnahan's positions on hotly debated issues such as homeland security, ANWR and a prescription drug plan.</p>
+              <br />
+              <p>The Talent campaign budgeted for a five-week tracking program that later proved invaluable. Two significant campaign decisions were made from the tracking data. The first was decided after measuring how powerful attacks were from Carnahan and Democrat allies. It was clear in the data that attacks on Talent's support of modernizing Social Security were cutting into his vote share, while attacks on various education stances were not. Armed with this information, the Talent campaign was able to decide to respond strongly to the Social Security accusations in paid media, while not devoting valuable campaign resources to the education hits.</p>
+              <br />
+              <p>Another turning point during tracking occurred about two weeks before Election Day. Both the Talent and Carnahan campaigns, along with both state parties and countless third party interest groups, were engaged in heavy contrast ads. In the tracking verbatim comments, voters were becoming disenchanted with both Talent and Carnahan due to what they thought was too negative of campaigning. This was also causing Talent's unfavorable numbers to rapidly increase. While it is typical for this to be seen in the course of the campaign, it was rare to see this level of disenchantment. Moreover, we saw this perception of negativity among Talent's GOP base. To ensure the heavy contrast would not suppress GOP voters, the Talent campaign made the difficult decision to run only positive ads for a 5 day period. We immediately saw Talent's favorable ratings rise after this decision.</p>
+              <br />
+              <p>Senator Talent defeated Jean Carnahan 50% to 48%. "Talent's win meant they (Republicans) didn't have just the state; they had the Senate" (Time Magazine, November 18, 2002). There were a few key factors that led to his victory. Foremost, while Talent lost among women in his 2000 gubernatorial race by 14-points (43%-57%), he only had a 5-point deficit in 2002 (47%-52%). Secondly, in 2000 Talent garnered 56% of the vote in the Springfield media market, but improved his vote share to 60% in 2002. Also, improved turnout efforts from both the state and national parties help boost turnout out-state to help offset strong union efforts in St. Louis City and Kansas City.</p>
+              <br />
+              <p>Defeating an incumbent is never an easy task, especially when it is one of the closest watched races in the country. American Viewpoint is honored to have played a part in Senator Talent's historic win.</p>
+          </div>
+        </div>
 
       </div>
     </div>
@@ -642,12 +903,7 @@
         <div>
           <div class="footer-logo"><img src="Logo.png" alt="American Viewpoint" /></div>
           <p class="footer-tagline">Accurate. Attentive. Actionable.<br />Public opinion research since 1985.</p>
-        </div>
-        <div class="footer-links">
-          <p class="footer-heading">Pages</p>
-          <p><a href="services.html">Services</a></p>
-          <p><a href="case-studies.html">Case Studies</a></p>
-          <p><a href="news.html">News</a></p>
+          <p style="margin-top: 12px;"><a href="case-studies.html">See our case studies &rarr;</a></p>
         </div>
         <div class="footer-contact">
           <p class="footer-heading">Get In Touch</p>
@@ -661,26 +917,100 @@
     </div>
   </footer>
 
+  <div id="caseModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalHeadline">
+    <div class="modal-box">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <h2 class="modal-headline" id="modalHeadline"></h2>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
   <script>
     (function () {
-      document.querySelectorAll('.case-card').forEach(function(card) {
-        card.querySelector('.case-card-close').addEventListener('click', function(e) {
-          e.stopPropagation();
-          card.classList.remove('expanded');
-        });
+      var modal = document.getElementById('caseModal');
+      var modalHeadline = document.getElementById('modalHeadline');
+      var modalContent = document.getElementById('modalContent');
 
-        card.addEventListener('click', function() {
-          if (!card.querySelector('.case-detail')) return;
-          var wasExpanded = card.classList.contains('expanded');
-          document.querySelectorAll('.case-card.expanded').forEach(function(c) {
-            c.classList.remove('expanded');
-          });
-          if (!wasExpanded) {
-            var scrollY = window.scrollY;
-            card.classList.add('expanded');
-            window.scrollTo(0, scrollY);
+      var _scrollY = 0;
+
+      function openModal(card) {
+        var id = card.dataset.id;
+        var source = document.querySelector('.detail-panel[data-for="' + id + '"]');
+        if (!source) return;
+        modalHeadline.textContent = card.querySelector('.case-headline').textContent;
+        modalContent.innerHTML = source.innerHTML;
+        modal.classList.add('open');
+        // iOS-safe scroll lock: freeze body in place without losing scroll position
+        _scrollY = window.scrollY;
+        document.body.style.top = '-' + _scrollY + 'px';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+      }
+
+      function closeModal() {
+        modal.classList.remove('open');
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, _scrollY);
+      }
+
+      // Apply filter from URL parameter on page load (?filter=political etc.)
+      (function() {
+        var params = new URLSearchParams(window.location.search);
+        var f = params.get('filter');
+        if (f) {
+          var target = document.querySelector('.case-filter-btn[data-filter="' + f + '"]');
+          if (target) {
+            document.querySelectorAll('.case-filter-btn').forEach(function(b) {
+              b.classList.remove('active');
+              b.setAttribute('aria-pressed', 'false');
+            });
+            target.classList.add('active');
+            target.setAttribute('aria-pressed', 'true');
+            document.querySelectorAll('.case-card').forEach(function(card) {
+              card.style.display = (card.dataset.category === f) ? '' : 'none';
+            });
           }
+        }
+      })();
+
+      // Filter tabs
+      document.querySelectorAll('.case-filter-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.case-filter-btn').forEach(function(b) {
+            b.classList.remove('active');
+            b.setAttribute('aria-pressed', 'false');
+          });
+          btn.classList.add('active');
+          btn.setAttribute('aria-pressed', 'true');
+          var filter = btn.dataset.filter;
+          document.querySelectorAll('.case-card').forEach(function(card) {
+            var match = filter === 'all' || card.dataset.category === filter;
+            card.style.display = match ? '' : 'none';
+          });
         });
+      });
+
+      // Card click / keyboard → open modal
+      document.querySelectorAll('.case-card.has-detail').forEach(function(card) {
+        card.addEventListener('click', function() { openModal(card); });
+        card.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(card); }
+        });
+      });
+
+      // Close via button
+      document.querySelector('.modal-close').addEventListener('click', closeModal);
+
+      // Close via backdrop click
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeModal();
+      });
+
+      // Close via Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
       });
     })();
   </script>
@@ -723,6 +1053,7 @@
       drawer.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
     })();
   </script>
+
 
 </body>
 </html>
