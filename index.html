@@ -759,7 +759,8 @@
 
       .slider-btn.prev { left: 4px; }
       .slider-btn.next { right: 4px; }
-      .slider-btn { background: transparent; color: var(--blue-dark); opacity: 1; }
+      .slider-btn { background: transparent; color: var(--blue-dark); opacity: 1; -webkit-tap-highlight-color: transparent; }
+      .slider-btn:active { background: transparent; }
     }
   </style>
 </head>
@@ -1027,12 +1028,12 @@
       <div class="testimonials-slider" id="testimonialSlider">
         <button class="slider-btn prev" aria-label="Previous">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 3L5 8L10 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
         <button class="slider-btn next" aria-label="Next">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 3L11 8L6 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
 
